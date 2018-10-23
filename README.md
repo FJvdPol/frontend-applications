@@ -24,3 +24,9 @@ npm run test
 ```
 npm run lint
 ```
+
+
+Added packages (keeping for reference)
+- npm install --save sanitize.css
+- npm install -D sass-loader node-sass
+- 
