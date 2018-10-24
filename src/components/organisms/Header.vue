@@ -5,10 +5,13 @@
     <nav>
       <ul class="top">
         <router-link tag="li" to="/">
-          <a>Start Risicoindicatie</a>
+          <a>Home</a>
         </router-link>
         <router-link tag="li" to="/clienten">
           <a>Cliënten</a>
+        </router-link>
+        <router-link tag="li" to="/risico-analyse">
+          <a>Risico Analyse</a>
         </router-link>
       </ul>
       <ul class="bottom">

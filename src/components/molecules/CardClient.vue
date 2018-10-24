@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .client {
     width: calc(50% - 0.5rem);
     margin-right: 1rem;
