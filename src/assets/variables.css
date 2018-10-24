@@ -1,7 +1,9 @@
 :root {
   --color-main: #9B27B0;
+  --color-secondary: #8D24AA;
   --color-dark: #691B9A;
   --color-gradient-start: #6E34BF;
-  --color-gradient-end: var(--color-main);
   --color-light: #E1BEE7;
+  --gradient-bg: -webkit-linear-gradient(var(--color-gradient-start), var(--color-main));
+  --gradient-bg-dark: -webkit-linear-gradient(var(--color-dark), var(--color-main));
 }

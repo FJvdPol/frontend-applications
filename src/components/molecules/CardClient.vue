@@ -30,11 +30,15 @@ export default {
 
 <style lang="scss">
   .client {
-    width: 70vw;
+    width: calc(50% - 0.5rem);
+    margin-right: 1rem;
     max-width: 20rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     border-radius: 5px;
     box-shadow: 0px 10px 40px 0px rgba(0,0,0,0.15);
+    &:nth-of-type(even){
+      margin-right: 0;
+    }
     a {
       text-decoration: none;
     }

@@ -22,9 +22,11 @@ export default {
 
 <style lang="scss">
   .clients-list {
+    max-width: 60rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    // flex-direction: column;
+    // align-items: center;
+    flex-wrap: wrap;
     padding-top: 1rem;
   }
 </style>

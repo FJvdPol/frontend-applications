@@ -1,0 +1,460 @@
+[
+  {
+    "id": 0,
+    "Vraag": "Geslacht: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+        {
+          "Antwoord": "Man",
+          "Gewicht": "-0,12611"
+        },
+        {
+          "Antwoord": "Vrouw",
+          "Gewicht": "0"
+        }
+      ]
+  },
+  {
+    "id": 1,
+    "Vraag": "Herkomst ouders: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+      {
+      "Antwoord": "Beide ouders Nederlands",
+      "Gewicht": "0,00000"
+      },
+        {
+        "Antwoord": "Beide ouders niet Nederlands",
+        "Gewicht": "0,16972"
+        },
+        {
+          "Antwoord": "Een van de ouders Nederlands en de andere niet Nederlands",
+          "Gewicht": "-0,08943"
+        }
+    ]
+  },
+  {
+    "id": 2,
+    "Vraag": "Type huishouden: ",
+    "Categorie": "Huisvesting",
+    "Opties": [
+        {
+          "Antwoord": "Eenouderhuishouden",
+          "Gewicht": "0,49608"
+        },
+        {
+          "Antwoord": "Eenpersoonshuishouden",
+          "Gewicht": "1,71859"
+        },
+        {
+          "Antwoord": "Gehuwd paar zonder kinderen",
+          "Gewicht": "1,06108"
+        },
+        {
+          "Antwoord": "Gehuwd paar met kinderen",
+          "Gewicht": "0,00000"
+        },
+        {
+          "Antwoord": "Institutioneel huishouden",
+          "Gewicht": "1,92321"
+        },
+        {
+          "Antwoord": "Niet-gehuwd paar met kinderen",
+          "Gewicht": "0,32694"
+        },
+        {
+          "Antwoord": "Niet-gehuwd paar zonder kinderen",
+          "Gewicht": "-14,15530"
+        },
+        {
+          "Antwoord": "Overig huishouden",
+          "Gewicht": "0,91365"
+        },
+        {
+          "Antwoord": "Onbekend huishouden",
+          "Gewicht": "-13,81002"
+        }
+      ]
+  },
+  {
+    "id": 3,
+    "Vraag": "Scheiding: ",
+    "Categorie": "Huiselijke relaties",
+    "Opties": [
+      {
+        "Antwoord": "Ja",
+        "Gewicht": "0,27683"
+      },
+      {
+        "Antwoord": "Nee",
+        "Gewicht": "0"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "Vraag": "Voortijdig school verlater: ",
+    "Categorie": "Onderwijs",
+    "Opties": [
+      {
+        "Antwoord": "Voortijdig schoolverlaten",
+        "Gewicht": "0,34684"
+      },
+      {
+        "Antwoord": "Uit onderwijs met startkwalificatie",
+        "Gewicht": "-13,64193"
+      },
+      {
+        "Antwoord": "Niet van toepassing",
+        "Gewicht": "0,38736"
+      },
+      {
+        "Antwoord": "Onbekend",
+        "Gewicht": "0,80564"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "Vraag": "Soort onderwijs van het kind: ",
+    "Categorie": "Werk & opleiding",
+    "Opties": [
+      {
+        "Antwoord": "Regulier onderwijs",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Niet-regulier onderwijs",
+        "Gewicht": "-0,33031"
+      },
+      {
+        "Antwoord": "Onderwijs onbekend",
+        "Gewicht": "-0,76957"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "Vraag": "Soort woning: ",
+    "Categorie": "Huisvesting",
+    "Opties": [
+      {
+        "Antwoord": "Eigen woning",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Huurwoning met huurtoeslag",
+        "Gewicht": "0,38401"
+      },
+      {
+        "Antwoord": "Huurwoning zonder huurtoeslag",
+        "Gewicht": "0,40420"
+      },
+      {
+        "Antwoord": "Onbekend",
+        "Gewicht": "2,40126"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "Vraag": "Maatschappelijke participatie vader: ",
+    "Categorie": "Maatschappelijke participatie",
+    "Opties": [
+      {
+        "Antwoord": "Werkend of overig actief",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Geen werk en niet actief",
+        "Gewicht": "0,33772"
+      },
+      {
+        "Antwoord": "Onbekend",
+        "Gewicht": "0,23486"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "Vraag": "Maatschappelijke participatie moeder: ",
+    "Categorie": "Maatschappelijke participatie",
+    "Opties": [
+      {
+        "Antwoord": "Werkend of overig actief",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Geen werk en niet actief",
+        "Gewicht": "0,36958"
+      },
+      {
+        "Antwoord": "Onbekend",
+        "Gewicht": "-0,95012"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "Vraag": "Als slachtoffer bekend bij slachtofferhulp: ",
+    "Categorie": "Geestelijke gezondheid",
+    "Opties": [
+      {
+        "Antwoord": "Ja",
+        "Gewicht": "0,23639"
+      },
+      {
+        "Antwoord": "Nee",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "Vraag": "Hulptraject: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+      {
+        "Antwoord": "Jeugdhulp zonder verblijf gehad",
+        "Gewicht": "1,52774"
+      },
+      {
+        "Antwoord": "Geen jeugdhulp zonder verblijf gehad",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "Vraag": "Leeftijd moeder bij geboorte: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+      {
+        "Antwoord": "Jonger dan 20 jaar",
+        "Gewicht": "0,45150"
+      },
+      {
+        "Antwoord": "20 tot 25 jaar",
+        "Gewicht": "0,10852"
+      },
+      {
+        "Antwoord": "25 tot 30 jaar",
+        "Gewicht": "-0,08841"
+      },
+      {
+        "Antwoord": "35 tot 40 jaar",
+        "Gewicht": "0,23988"
+      },
+      {
+        "Antwoord": "Ouder dan 40 jaar",
+        "Gewicht": "-0,11153"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "Vraag": "Leeftijd vader bij geboorte: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+      {
+        "Antwoord": "Jonger dan 20 jaar",
+        "Gewicht": "-0,00587"
+      },
+      {
+        "Antwoord": "20 tot 25 jaar",
+        "Gewicht": "0,03107"
+      },
+      {
+        "Antwoord": "25 tot 30 jaar",
+        "Gewicht": "0,03107"
+      },
+      {
+        "Antwoord": "35 tot 40 jaar",
+        "Gewicht": "-0,21624"
+      },
+      {
+        "Antwoord": "Ouder dan 40 jaar",
+        "Gewicht": "-0,32645"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "Vraag": "Vader of moeder verdacht van een delict in het verleden: ",
+    "Categorie": "Justitie",
+    "Opties": [
+      {
+        "Antwoord": "Ja",
+        "Gewicht": "0,50027"
+      },
+      {
+        "Antwoord": "Nee",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "Vraag": "Kind in het verleden verdacht van een delict: ",
+    "Categorie": "Justitie",
+    "Opties": [
+      {
+        "Antwoord": "Ja",
+        "Gewicht": "0,94738"
+      },
+      {
+        "Antwoord": "Nee",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "Vraag": "Kind in aanraking geweest met bureau HALT voor een delict: ",
+    "Categorie": "Justitie",
+    "Opties": [
+      {
+        "Antwoord": "Ja",
+        "Gewicht": "0,36448"
+      },
+      {
+        "Antwoord": "Nee",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "Vraag": "Verandering in het voortgezet onderwijsniveau: ",
+    "Categorie": "Werk & opleiding",
+    "Opties": [
+      {
+        "Antwoord": "Opschalen of gelijkblijvend",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Afschalen",
+        "Gewicht": "0,58732"
+      },
+      {
+        "Antwoord": "Onbekend",
+        "Gewicht": "-1,11682"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "Vraag": "Leeftijdsverschil ouders meer dan 5 jaar: ",
+    "Categorie": "Algemeen",
+    "Opties": [
+      {
+        "Antwoord": "Minder dan 5 jaar",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Meer dan 5 jaar",
+        "Gewicht": "0,28581"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "Vraag": "Huidig onderwijsniveau van het kind: ",
+    "Categorie": "Werk & opleiding",
+    "Opties": [
+      {
+        "Antwoord": "Basisonderwijs",
+        "Gewicht": "0,25232"
+      },
+      {
+        "Antwoord": "Vmbo b/k, mbo 1 en mbo 2",
+        "Gewicht": "0,87842"
+      },
+      {
+        "Antwoord": "Vmbo g/t, mbo 3 en mbo 4",
+        "Gewicht": "0,56882"
+      },
+      {
+        "Antwoord": "HAVO onderbouw, HAVO bovenbouw of HBO bachelor",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Vwo en Wo bachelor",
+        "Gewicht": "-0,83566"
+      },
+      {
+        "Antwoord": "Onderwijs onbekend",
+        "Gewicht": "0,00000"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "Vraag": "Hoogst behaalde onderwijsniveau vader: ",
+    "Categorie": "Werk & opleiding",
+    "Opties": [
+      {
+        "Antwoord": "Basisonderwijs",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Vmbo b/k, mbo 1 en mbo 2",
+        "Gewicht": "-0,21630"
+      },
+      {
+        "Antwoord": "Vmbo g/t, mbo 3 en mbo 4",
+        "Gewicht": "0,67119"
+      },
+      {
+        "Antwoord": "HAVO onderbouw, HAVO bovenbouw of HBO bachelor",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Vwo en Wo bachelor",
+        "Gewicht": "-12,08995"
+      },
+      {
+        "Antwoord": "Onderwijs onbekend",
+        "Gewicht": "0,88464"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "Vraag": "Hoogst behaalde onderwijsniveau moeder: ",
+    "Categorie": "Werk & opleiding",
+    "Opties": [
+      {
+        "Antwoord": "Basisonderwijs",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Vmbo b/k, mbo 1 en mbo 2",
+        "Gewicht": "0,15936"
+      },
+      {
+        "Antwoord": "Vmbo g/t, mbo 3 en mbo 4",
+        "Gewicht": "0,03334"
+      },
+      {
+        "Antwoord": "HAVO onderbouw, HAVO bovenbouw of HBO bachelor",
+        "Gewicht": "0,00000"
+      },
+      {
+        "Antwoord": "Vwo en Wo bachelor",
+        "Gewicht": "-13,03162"
+      },
+      {
+        "Antwoord": "Onderwijs onbekend",
+        "Gewicht": "0,03655"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "Vraag": "",
+    "Categorie": "Intercept",
+    "Antwoord": "Intercept",
+    "Gewicht": "-7,36863"
+  }
+]

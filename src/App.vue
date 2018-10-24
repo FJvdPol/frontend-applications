@@ -29,14 +29,16 @@ export default {
   .container {
     display: block;
     padding: 1.5rem;
-    padding-top: 7.2rem;
+    padding-top: calc(4rem + 3.125rem);
     min-height: 100%;
   }
   #app {
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h2 {
-    color: var(--color-main);
+    color: var(--color-secondary);
     font-size: 2.5rem;
     font-weight: 700;
     margin-top: 0;
