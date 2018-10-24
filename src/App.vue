@@ -1,17 +1,14 @@
 
-
 <template>
   <div id="app">
     <Header />
-    <div class="container">
-      Initial commit
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
 
-import Header from './components/Header.vue'
+import Header from './components/organisms/Header.vue'
 export default {
   name: 'app',
   components: {
@@ -23,17 +20,26 @@ export default {
 <style>
   @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
   @import '~sanitize.css';
-
   @import './assets/variables.css';
+
+
   body {
     overflow-x: hidden;
   }
   .container {
-    padding: 1rem;
-    padding-top: 5.2rem;
+    display: block;
+    padding: 1.5rem;
+    padding-top: 7.2rem;
+    min-height: 100%;
   }
   #app {
     min-height: 100vh;
+  }
+  h2 {
+    color: var(--color-main);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
   }
 
 </style>

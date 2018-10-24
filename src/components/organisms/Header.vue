@@ -4,8 +4,12 @@
     <button v-on:click="toggleMenu">Menu</button>
     <nav>
       <ul>
-        <li>Start risicoindicatie</li>
-        <li>Cliënten</li>
+        <router-link tag="li" to="/">
+          <a>Start Risicoindicatie</a>
+        </router-link>
+        <router-link tag="li" to="/clienten">
+          <a>Cliënten</a>
+        </router-link>
       </ul>
     </nav>
   </header>
@@ -17,19 +21,25 @@ export default {
   name: 'Header',
   data() {
     return {
-      menuVisible: false
+      menuVisible: false,
     }
   },
   methods: {
     toggleMenu(){
-      console.log('click');
       if (this.menuVisible){
         this.menuVisible = false
       } else {
         this.menuVisible = true
       }
+    },
+
+  },
+  watch: {
+  '$route' () {
+      this.menuVisible = false;
     }
   }
+
 }
 </script>
 
@@ -40,15 +50,16 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     color: white;
     font-size: 14px;
     background-color: var(--color-dark);
     z-index: 2;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.05);
     &.menu-visible {
       nav {
         transform: translateX(-70vw);
-        box-shadow: -3px 0px 7px 0px rgba(0,0,0,0.2);
+        box-shadow: -3px 0px 15px 0px rgba(0,0,0,0.1);
       }
       button {
         &::after {
@@ -112,7 +123,15 @@ export default {
         text-align: center;
         margin-bottom: 2rem;
         font-size: 16px;
-        font-weight: bold;
+        font-weight: normal;
+        &.router-link-exact-active {
+          font-weight: bold;
+        }
+        a {
+          color: inherit;
+          font-weight: inherit;
+          text-decoration: none;
+        }
       }
     }
   }
