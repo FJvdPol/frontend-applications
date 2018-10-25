@@ -38,9 +38,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../../assets/forms';
-  .input-group {
-    margin-bottom: 2rem;
-  }
+<style lang="scss">
 </style>

@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
   .clients-list {
-    max-width: 60rem;
+    // max-width: 60rem;
     display: flex;
     // flex-direction: column;
     // align-items: center;

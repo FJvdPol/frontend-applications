@@ -1,7 +1,8 @@
 <template>
   <header v-bind:class="{'menu-visible': menuVisible}">
+    <button id="back-button" v-on:click="$router.go(-1)">vorige</button>
     <h1><router-link :to="{ name: 'Home', params: {} }">Kind veilig thuis</router-link></h1>
-    <button v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
+    <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
     <nav>
       <ul class="top">
         <router-link tag="li" to="/">
@@ -56,7 +57,7 @@ export default {
     width: 100%;
     position: fixed;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 1.5rem;
     color: white;
@@ -64,12 +65,13 @@ export default {
     background-color: var(--color-dark);
     z-index: 2;
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.05);
+
     &.menu-visible {
       nav {
         transform: translateX(-70vw);
         box-shadow: -10px 20px 30px 0px rgba(0,0,0,0.15);
       }
-      button {
+      #menu-button {
         &::after {
           transform: rotate(45deg);
           top: 50%;
@@ -82,7 +84,8 @@ export default {
     }
   }
   button {
-    width: 4.5rem;
+    width: 4rem;
+    line-height: 1;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -95,6 +98,7 @@ export default {
     // padding-right: 25px;
     text-align: left;
     height: 3.125rem;
+    padding: 0;
     &:focus, &:active {
       outline: none;
     }
@@ -105,12 +109,52 @@ export default {
       height: 2px;
       background-color: #fff;
       position: absolute;
-      right: 0;
-      top: calc(50% - 3px);
       transition: all 0.3s ease-in-out;
     }
-    &::after {
-      top: calc(50% + 3px);
+    &#back-button {
+      width: 3.5rem;
+      text-align: right;
+      &::before, &::after {
+        width: 10px;
+      }
+      &::before {
+        top: calc(50% - 4px);
+        transform: rotate(-45deg);
+      }
+      &::after {
+        bottom: calc(50% - 4px);
+        transform: rotate(45deg);
+      }
+    }
+    &#menu-button {
+      &::before, &::after {
+        right: 0;
+        top: calc(50% - 3px);
+      }
+      &::after {
+        top: calc(50% + 3px);
+      }
+    }
+
+  }
+  h1 {
+    height: 3.125rem;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: inherit;
+    font-weight: normal;
+    font-size: inherit;
+    display: flex;
+    align-items: stretch;
+    line-height: 1;
+    a {
+      display: flex;
+      align-items: center;
+      color: inherit;
+      font-weight: inherit;
+      font-size: inherit;
+      text-decoration: none;
     }
   }
 
@@ -175,17 +219,5 @@ export default {
     }
 
 
-  }
-
-  h1 {
-    color: inherit;
-    font-weight: normal;
-    font-size: inherit;
-    a {
-      color: inherit;
-      font-weight: inherit;
-      font-size: inherit;
-      text-decoration: none;
-    }
   }
 </style>

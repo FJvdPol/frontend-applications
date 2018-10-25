@@ -1,6 +1,6 @@
 <template >
   <article class="client">
-    <router-link :to="{ name: 'SingleClient', params: { name: client.name.toLowerCase()} }">
+    <router-link :to="{ path: client.name, query: { client }}" append>
       <figure v-if="client.img">
         <img :src="client.img" alt="">
       </figure>
@@ -21,16 +21,14 @@
 <script>
 export default {
   name: 'CardClient',
-  data(){
-    return {}
-  },
   props: ['client']
 }
 </script>
 
 <style lang="scss" scoped>
   .client {
-    width: calc(50% - 0.5rem);
+    // width: calc(50% - 0.5rem);
+    width: 100%;
     margin-right: 1rem;
     max-width: 20rem;
     margin-bottom: 2rem;

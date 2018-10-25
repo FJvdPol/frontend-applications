@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Cliënten</h2>
       <ClientsList :clients="clients"/>
-      <AddClientBar />
+      <!-- <AddClientBar /> -->
     </div>
 
   </main>

@@ -1,25 +1,24 @@
 <template>
   <nav id="tab-nav">
     <ul>
-      <li v-for="(category, index) in categories" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''">{{category}}</li>
+      <li v-for="(tab, index) in tabs" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''">{{tab}}</li>
     </ul>
     <div id="tab-bg"></div>
   </nav>
+
 </template>
 
 <script>
-import { TweenLite } from 'gsap/all';
+import { TweenLite } from 'gsap/all'
 import EventBus from '../../event-bus.js'
 
 export default {
   name: 'AnalysisNavigation',
-  data() {
-    return {
-    }
-  },
-  props: ['categories'],
+  props: ['tabs', 'listenTo'],
   mounted() {
-    EventBus.$on('riskindication-form-next', index => this.changeActiveTab(index + 1))
+    EventBus.$on(this.listenTo, index => {
+      this.changeActiveTab(index)
+    })
   },
   methods: {
     changeActiveTab(index) {
@@ -27,7 +26,6 @@ export default {
       let bg = document.querySelector('#tab-bg')
       let allPages = document.querySelectorAll('.tab-page')
       let newElWidth, newElLeft, timing
-
       if (index === allTabs.length){
         return false
       }
@@ -46,8 +44,7 @@ export default {
       // set timing for easing to scrolltop if page has been scrolled
       timing = window.scrollY > 0 ? 0.5 : 0
       // scroll to top of page
-      TweenLite.to(window, timing, {scrollTo: {y:0}, onComplete: () => {
-
+      TweenLite.to(window, timing, {scrollTo: {y:0}, autoKill:true, onComplete: () => {
 
         TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
 
@@ -102,7 +99,7 @@ export default {
     #tab-bg {
       content: "";
       display: block;
-      background-color: var(--color-ultra-light);
+      background-color: white;
       width: 6.5rem;
       height: 2.5rem;
       position: absolute;

@@ -16,11 +16,11 @@ export default {
 }
 </script>
 
-<style>
-  @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+<style lang="scss">
+  @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
   @import '~sanitize.css';
   @import './assets/variables.css';
-
+  @import './assets/forms';
 
   body {
     overflow-x: hidden;

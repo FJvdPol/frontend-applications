@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './components/pages/Home.vue'
+import Login from './components/pages/Login.vue'
 import PageClients from './components/pages/PageClients.vue'
 import SingleClient from './components/templates/SingleClient.vue'
 import PageRiskAnalysis from './components/pages/PageRiskAnalysis.vue'
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/clienten',
