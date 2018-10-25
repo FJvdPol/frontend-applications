@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import { Tweenlite, ScrollToPlugin } from 'gsap/all';
-
 import Header from './components/organisms/Header.vue'
 export default {
   name: 'app',

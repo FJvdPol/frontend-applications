@@ -5,7 +5,7 @@
         <img :src="client.img" alt="">
       </figure>
       <figure v-else class="no-img">
-        <figcaption><i class="fa fa-user"></i> <span>Afbeelding niet beschikbaar</span> </figcaption>
+        <figcaption><i class="fa fa-user"></i> <span>Geen foto</span> </figcaption>
       </figure>
       <div class="nav">
         <h3>{{client.name}}</h3>

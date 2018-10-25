@@ -12,7 +12,7 @@
 
 <script>
 import ClientsList from '../organisms/ClientsList.vue'
-import AddClientBar from '../molecules/AddClientBar.vue'
+import AddClientBar from '../atoms/AddClientBar.vue'
 
 export default {
   name: 'PageClients',

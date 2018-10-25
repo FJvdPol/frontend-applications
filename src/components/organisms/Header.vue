@@ -1,7 +1,7 @@
 <template>
   <header v-bind:class="{'menu-visible': menuVisible}">
     <h1><router-link :to="{ name: 'Home', params: {} }">Kind veilig thuis</router-link></h1>
-    <button v-on:click="toggleMenu">Menu</button>
+    <button v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
     <nav>
       <ul class="top">
         <router-link tag="li" to="/">
@@ -60,7 +60,7 @@ export default {
     align-items: center;
     padding: 0 1.5rem;
     color: white;
-    font-size: 14px;
+    font-size: 0.875rem;
     background-color: var(--color-dark);
     z-index: 2;
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.05);
@@ -82,6 +82,7 @@ export default {
     }
   }
   button {
+    width: 4.5rem;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -91,7 +92,8 @@ export default {
     border: 0;
     text-transform: lowercase;
     position: relative;
-    padding-right: 40px;
+    // padding-right: 25px;
+    text-align: left;
     height: 3.125rem;
     &:focus, &:active {
       outline: none;
@@ -99,7 +101,7 @@ export default {
     &::before, &::after {
       display: block;
       content: "";
-      width: 30px;
+      width: 20px;
       height: 2px;
       background-color: #fff;
       position: absolute;
@@ -145,8 +147,9 @@ export default {
       li {
         text-align: center;
         margin-bottom: 2rem;
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: normal;
+        transition: all 0.3s ease-in-out;
         &.router-link-exact-active {
           font-weight: bold;
         }

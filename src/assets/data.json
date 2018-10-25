@@ -3,6 +3,7 @@
     "id": 0,
     "question": "Geslacht: ",
     "category": "Algemeen",
+    "type": "radio",
     "choices": [
         {
           "choice": "Man",
@@ -80,6 +81,7 @@
     "id": 3,
     "question": "Scheiding: ",
     "category": "Huiselijke relaties",
+    "type": "radio",
     "choices": [
       {
         "choice": "Ja",
@@ -198,6 +200,7 @@
     "id": 9,
     "question": "Als slachtoffer bekend bij slachtofferhulp: ",
     "category": "Geestelijke gezondheid",
+    "type": "radio",
     "choices": [
       {
         "choice": "Ja",
@@ -282,6 +285,7 @@
     "id": 13,
     "question": "Vader of moeder verdacht van een delict in het verleden: ",
     "category": "Justitie",
+    "type": "radio",
     "choices": [
       {
         "choice": "Ja",
@@ -297,6 +301,7 @@
     "id": 14,
     "question": "Kind in het verleden verdacht van een delict: ",
     "category": "Justitie",
+    "type": "radio",
     "choices": [
       {
         "choice": "Ja",
@@ -312,6 +317,7 @@
     "id": 15,
     "question": "Kind in aanraking geweest met bureau HALT voor een delict: ",
     "category": "Justitie",
+    "type": "radio",
     "choices": [
       {
         "choice": "Ja",
@@ -346,6 +352,7 @@
     "id": 17,
     "question": "Leeftijdsverschil ouders meer dan 5 jaar: ",
     "category": "Algemeen",
+    "type": "radio",
     "choices": [
       {
         "choice": "Minder dan 5 jaar",

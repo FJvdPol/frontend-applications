@@ -10,7 +10,7 @@
 </template>
 
 <script>
-
+import { TweenLite } from 'gsap/all';
 export default {
   name: 'AnalysisNavigation',
   data() {
@@ -23,9 +23,10 @@ export default {
   },
   methods: {
     changeActiveTab(e) {
-      let tab = e.target;
-      let allTabs = document.querySelectorAll('#tab-nav li');
-      let newElWidth;
+      let tab = e.target
+      let allTabs = document.querySelectorAll('#tab-nav li')
+      let allPages = document.querySelectorAll('.tab-page')
+      let newElWidth
 
       // animate the white selector behind active tabs
       if (tab === allTabs[allTabs.length - 1]) {
@@ -38,8 +39,14 @@ export default {
       TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
 
       // toggle active class
-      allTabs.forEach(tab => tab.classList.remove('active-tab'))
-      tab.classList.add('active-tab')
+      allTabs.forEach((tab, index) => {
+        tab.classList.remove('active-tab')
+        allPages[index].classList.remove('active-page')
+        if (tab === e.target) {
+          tab.classList.add('active-tab')
+          allPages[index].classList.add('active-page')
+        }
+      })
 
       // scroll container to get active tab in view
       let center = (window.innerWidth - tab.offsetWidth) / 2
@@ -80,7 +87,7 @@ export default {
     #tab-bg {
       content: "";
       display: block;
-      background-color: white;
+      background-color: var(--color-ultra-light);
       width: 6.5rem;
       height: 2.5rem;
       position: absolute;
