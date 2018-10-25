@@ -9,8 +9,8 @@
 
 <script>
 import json from '../../assets/data.json'
-import AnalysisNavigation from '../molecules/AnalysisNavigation.vue'
-import AnalysisBody from '../molecules/AnalysisBody.vue'
+import AnalysisNavigation from '../organisms/AnalysisNavigation.vue'
+import AnalysisBody from '../organisms/AnalysisBody.vue'
 import RiskIndicationBar from '../atoms/RiskIndicationBar.vue'
 
 export default {

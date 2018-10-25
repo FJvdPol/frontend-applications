@@ -6,6 +6,6 @@
   --color-light: #E1BEE7;
   --color-ultra-light: #F3E5F5;
   --color-grey: #7e7e7e;
-  --gradient-bg: -webkit-linear-gradient(var(--color-gradient-start), var(--color-main));
-  --gradient-bg-dark: -webkit-linear-gradient(var(--color-dark), var(--color-main));
+  --gradient-bg: -webkit-linear-gradient(-45deg, var(--color-gradient-start), var(--color-main));
+  --gradient-bg-dark: -webkit-linear-gradient(-45deg, var(--color-dark), var(--color-main));
 }

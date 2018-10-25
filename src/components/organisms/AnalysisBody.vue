@@ -1,22 +1,23 @@
 <template>
-  <div class="tab-page-holder">
+  <article class="tab-page-holder">
     <section v-for="(category, index) in questionsByCategory" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
       <div class="container">
         <h2>{{categories[index]}}</h2>
-        <form class="" action="index.html" method="post">
-          <InputGroup @valueChange="emit" v-for="(questionObject, index) in splitQuestions(index)" :inputObject="questionObject" :key="index" />
+        <form @submit.prevent>
+          <InputGroup @valueChange="emitChildValue" v-for="(questionObject, index) in splitQuestions(index)" :inputObject="questionObject" :key="index" />
         </form>
-        <Button :textContent="'volgende'"/>
-
+        <Button @click.native="nextPage(index)" :textContent="'volgende'"/>
       </div>
     </section>
-  </div>
+  </article>
 
 </template>
 
 <script>
-import InputGroup from '../atoms/InputGroup.vue'
+import InputGroup from '../molecules/InputGroup.vue'
 import Button from '../atoms/Button.vue'
+import EventBus from '../../event-bus.js'
+
 export default {
   name: 'AnalysisBody',
   data() {
@@ -29,8 +30,11 @@ export default {
     splitQuestions(index) {
       return this.questionsByCategory[index]
     },
-    emit(data){
+    emitChildValue(data){
       this.$emit('valueChange', data)
+    },
+    nextPage(index){
+      EventBus.$emit('riskindication-form-next', index)
     }
   },
   components: {
