@@ -1,11 +1,14 @@
 :root {
-  --color-main: #9B27B0;
-  --color-secondary: #8D24AA;
-  --color-dark: #691B9A;
-  --color-gradient-start: #6E34BF;
-  --color-light: #E1BEE7;
-  --color-ultra-light: #F3E5F5;
+  --color-main: #6C63FF; /* #40C4FF; */
+  --color-dark:  #463AFF; /* #0091EA; */
+  --color-accent: #06D19C;
+  --color-gradient-start: var(--color-accent);/* #00E676; */
+  --color-light: #b5b1ff; /* #80D8FF; */
+  --color-ultra-light: #f0efff /* #E1F5FE */;
   --color-grey: #7e7e7e;
-  --gradient-bg: -webkit-linear-gradient(-45deg, var(--color-gradient-start), var(--color-main));
-  --gradient-bg-dark: -webkit-linear-gradient(-45deg, var(--color-dark), var(--color-main));
+  --color-grey-light: #EEE;
+  --color-grey-ultra-light: #F7F7F7;
+  --gradient-bg: -webkit-linear-gradient(-45deg, var(--color-gradient-start), var(--color-light));
+  --gradient-bg-dark: -webkit-linear-gradient(-45deg, var(--color-dark), var(--color-gradient-start));
+  --gradient-opaque: -webkit-linear-gradient(to bottom, rgb(64, 196, 255, 0), rgb(0, 230, 118, 1));
 }

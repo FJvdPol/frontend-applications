@@ -28,5 +28,14 @@ export default {
     // align-items: center;
     flex-wrap: wrap;
     padding-top: 1rem;
+    .client {
+      @media screen and (min-width: 42rem) {
+        margin-right: 1rem;
+        &:nth-of-type(even){
+          margin-right: 0;
+        }
+      }
+    }
   }
+
 </style>

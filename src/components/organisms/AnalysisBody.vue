@@ -47,14 +47,24 @@ export default {
 <style lang="scss" scoped>
   @import '../../assets/tabpages';
 
-  section {
-    background-color: var(--color-ultra-light);
-  }
+  // section {
+  //   background-color: var(--color-ultra-light);
+  // }
   h2 {
     // color: white;
     padding: 0 1.5rem;
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
+  }
+  .tab-page-holder {
+    min-height: 100vh;
+    .tab-page {
+      height: 100vh;
+      &.active-page {
+        height: auto;
+        min-height: 100vh;
+      }
+    }
   }
   .input-group {
     padding-left: 1.5rem;

@@ -11,10 +11,6 @@
         <h3>{{client.name}}</h3>
       </div>
     </router-link>
-
-
-
-
   </article>
 </template>
 
@@ -29,14 +25,10 @@ export default {
   .client {
     // width: calc(50% - 0.5rem);
     width: 100%;
-    margin-right: 1rem;
     max-width: 20rem;
     margin-bottom: 2rem;
     border-radius: 5px;
     box-shadow: 0px 10px 40px 0px rgba(0,0,0,0.15);
-    &:nth-of-type(even){
-      margin-right: 0;
-    }
     a {
       text-decoration: none;
     }
@@ -54,7 +46,7 @@ export default {
       height: 10rem;
       overflow: hidden;
       border-radius: 5px 5px 0 0;
-      background-color: #cecece;
+      background-color: var(--color-light);
       &.no-img {
         display: flex;
         justify-content: center;

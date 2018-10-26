@@ -33,11 +33,11 @@ export default {
 
       // get offsets for animation
       if (index === allTabs.length - 1) {
-        newElWidth = activeTab.offsetWidth / 16 + 0.5 + 'rem'
+        newElWidth = activeTab.offsetWidth / 16 - 0.5 + 'rem'
       } else {
         newElWidth = activeTab.offsetWidth / 16 + 2 + 'rem'
       }
-      newElLeft = activeTab.offsetLeft - 24 + 'px'
+      newElLeft = activeTab.offsetLeft - 40 + 'px'
 
 
       // start animation phase
@@ -73,26 +73,29 @@ export default {
   #tab-nav {
     position: relative;
     background: var(--gradient-bg);
-    color: var(--color-light);
+    color: var(--color-ultra-light);
     overflow-x: scroll;
     ul {
-      padding: 1.25rem 0 0.75rem;
+      padding: 0;
       margin: 0;
       display: flex;
       li {
+        height: 4rem;
+        padding-top: 2.4rem;
         position: relative;
         z-index: 1;
         white-space: nowrap;
         margin: 0 1rem;
         transition: all 0.2s ease-in-out;
+        font-size: 0.875rem;
         &.active-tab {
           color: var(--color-main);
         }
         &:first-of-type {
-          margin-left: 1.5rem;
+          margin-left: 2.5rem;
         }
         &:last-of-type {
-          padding-right: 1.5rem;
+          padding-right: 2.5rem;
         }
       }
     }
@@ -100,11 +103,11 @@ export default {
       content: "";
       display: block;
       background-color: white;
-      width: 6.5rem;
+      width: 6rem;
       height: 2.5rem;
       position: absolute;
       bottom: 0;
-      left: 0.5rem;
+      left: 1.5rem;
       border-radius: 25px 25px 0 0;
     }
   }

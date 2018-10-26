@@ -37,7 +37,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
   }
   h2 {
-    color: var(--color-secondary);
+    color: var(--color-main);
     font-size: 2.5rem;
     font-weight: 700;
     margin-top: 0;

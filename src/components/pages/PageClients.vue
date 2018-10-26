@@ -19,7 +19,16 @@ export default {
   data(){
     return {
       clients: [
-        {name: 'Henk', img: 'https://unsplash.it/400/400'},
+        {
+          name: 'Henk',
+          img: 'https://unsplash.it/400/400',
+          info: {
+            "Leeftijd": 12,
+            "Stad": 'Amsterdam',
+            "Postcode": '1112PT',
+            risk: 1.03
+          }
+        },
         {name: 'Pieter'},
         {name: 'Johan'}
       ]

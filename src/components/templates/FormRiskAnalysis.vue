@@ -2,7 +2,9 @@
   <div class="form-holder">
     <TabNavigation :tabs="getCategories()" :listenTo="'riskindication-form-next'"/>
     <AnalysisBody @valueChange="updateWeights" :questionsByCategory="getQuestionsByCategory()" :categories="getCategories()"/>
-    <RiskIndicationBar :percentage="percentage" />
+    <div class="risk-indication-bar">
+      <RiskIndication :percentage="percentage" />
+    </div>
   </div>
 </template>
 
@@ -10,7 +12,7 @@
 import json from '../../assets/data.json'
 import TabNavigation from '../organisms/TabNavigation.vue'
 import AnalysisBody from '../organisms/AnalysisBody.vue'
-import RiskIndicationBar from '../atoms/RiskIndicationBar.vue'
+import RiskIndication from '../atoms/RiskIndication.vue'
 
 export default {
   name: 'PageRiskAnalysis',
@@ -25,7 +27,7 @@ export default {
   components: {
     TabNavigation,
     AnalysisBody,
-    RiskIndicationBar
+    RiskIndication
   },
   methods: {
     getCategories() {
@@ -73,16 +75,4 @@ export default {
 </script>
 
 <style lang="scss">
-  .form-holder {
-    padding-top: 3.125rem;
-    #tab-nav {
-      #tab-bg {
-        background-color: var(--color-ultra-light)
-      }
-    }
-  }
-  .container {
-    padding-top: 2rem;
-  }
-
 </style>
