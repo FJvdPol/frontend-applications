@@ -26,7 +26,11 @@ npm run lint
 ```
 
 
+## Special thanks
+- illustrations: [Katerina Limpitsouni](https://undraw.co)
+
+
 Added packages (keeping for reference)
 - npm install --save sanitize.css
 - npm install -D sass-loader node-sass
-- 
+-

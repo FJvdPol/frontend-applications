@@ -1,6 +1,6 @@
 <template>
   <main id="single-client">
-    <div class="header" v-bind:style="client.img ? 'background-image: url('+client.img+');' : ''">
+    <div class="header" v-bind:style="client.img ? 'background-image: url('+client.img+');' : 'background-image: url(../assets/images/undraw_forgot_password.svg)'">
       <h2>{{client.name}}</h2>
     </div>
     <TabNavigation :tabs="categories" />
@@ -20,6 +20,10 @@
               <RiskIndication :percentage="client.info.risk"/>
               <Button :textContent="'indicatie bijstellen'"/>
             </ul>
+          </div>
+          <div v-if="!client.info">
+            <h3 class="center">Er is geen data over deze persoon.</h3>
+            <img src="/assets/images/undraw_blank_canvas.svg" alt="">
           </div>
         </div>
       </section>
@@ -45,7 +49,12 @@ export default {
     }
   },
   mounted() {
-    this.client = this.$route.query.client
+    if (this.$route.query.client) {
+      this.client = this.$route.query.client
+    } else {
+      this.client = {name: this.$route.params.name}
+    }
+
   }
 }
 </script>
@@ -54,11 +63,14 @@ export default {
   @import '../../assets/tabpages';
   #single-client {
     padding-top: 3.125rem;
+    #tab-nav {
+      background: var(--color-main);
+    }
     .header {
       min-height: 10rem;
       display: flex;
       align-items: flex-end;
-      padding: 0 1.5rem 1rem;
+      padding: 0 1.5rem;
       background-color: var(--color-light);
       background-position: center;
       background-size: cover;
@@ -92,6 +104,18 @@ export default {
         text-transform: capitalize;
       }
     }
+    h3 {
+      color: var(--color-grey);
+      font-weight: normal;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-top: 0;
+      color: var(--color-main);
+    }
     figure {
       width: 100%;
       overflow: hidden;
@@ -109,6 +133,11 @@ export default {
       .risk-indication-holder {
         justify-content: center;
       }
+      img {
+        display: block;
+        width: 70%;
+        margin: 5rem auto 0;
+      }
     }
     .list {
       list-style-type: none;
@@ -117,18 +146,6 @@ export default {
       li {
         margin: 1rem 0;
         width: 100%;
-        h3 {
-          color: var(--color-grey);
-          font-weight: normal;
-          font-size: 1rem;
-          margin-bottom: 0.25rem;
-        }
-        p {
-          font-size: 1.25rem;
-          font-weight: 500;
-          margin-top: 0;
-          color: var(--color-main);
-        }
       }
 
     }

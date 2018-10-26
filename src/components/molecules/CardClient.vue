@@ -5,7 +5,8 @@
         <img :src="client.img" alt="">
       </figure>
       <figure v-else class="no-img">
-        <figcaption><i class="fa fa-user"></i> <span>Geen foto</span> </figcaption>
+        <img src="/assets/images/undraw_forgot_password.svg" alt="">
+        <figcaption>Geen foto</figcaption>
       </figure>
       <div class="nav">
         <h3>{{client.name}}</h3>
@@ -42,26 +43,37 @@ export default {
       padding: 1rem;
     }
     figure {
+      position: relative;
       margin: 0;
       height: 10rem;
       overflow: hidden;
       border-radius: 5px 5px 0 0;
       background-color: var(--color-light);
       &.no-img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: relative;
+        img {
+          opacity: 0.5;
+        }
         figcaption {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
           color: white;
           text-align: center;
-          i {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-          }
-          span {
-            display: block;
-          }
         }
+      }
+      &::after {
+        content: "";
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        display: block;
+        background-color: var(--color-gradient-start);
+        background: var(--gradient-opaque);
+        z-index: 0;
       }
     }
     img {
