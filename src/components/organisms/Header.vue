@@ -1,26 +1,29 @@
 <template>
   <header v-bind:class="{'menu-visible': menuVisible}">
-    <button id="back-button" v-on:click="$router.go(-1)">vorige</button>
-    <h1><router-link :to="{ name: 'Home', params: {} }">Kind veilig thuis</router-link></h1>
-    <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
-    <nav>
-      <ul class="top">
-        <router-link tag="li" to="/">
-          <a>Home</a>
-        </router-link>
-        <router-link tag="li" to="/clienten">
-          <a>Cliënten</a>
-        </router-link>
-        <router-link tag="li" to="/risico-analyse">
-          <a>Risico Analyse</a>
-        </router-link>
-      </ul>
-      <ul class="bottom">
-        <li> <i class="fa fa-info-circle"></i> </li>
-        <li>Ingelogd als: NAAM</li>
+    <div class="content-holder">
+      <button id="back-button" :class="$route.path === '/' ? 'hidden' : ''" v-on:click="$router.go(-1)">vorige</button>
+      <h1><router-link :to="{ name: 'Home', params: {} }">Kind veilig thuis</router-link></h1>
+      <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
+      <nav>
+        <ul class="top">
+          <router-link tag="li" to="/">
+            <a>Home</a>
+          </router-link>
+          <router-link tag="li" to="/clienten">
+            <a>Cliënten</a>
+          </router-link>
+          <router-link tag="li" to="/risico-analyse">
+            <a>Risico Analyse</a>
+          </router-link>
+        </ul>
+        <ul class="bottom">
+          <li> <i class="fa fa-info-circle"></i> </li>
+          <li>Ingelogd als: NAAM</li>
 
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+    </div>
+
   </header>
 
 </template>
@@ -53,23 +56,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .home-page header {
+    #back-button {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
   header {
     width: 100%;
     position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0 1.5rem;
     color: white;
     font-size: 0.875rem;
     background-color: var(--color-dark);
     z-index: 2;
-    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.05);
-
+    box-shadow: 0px 3px 5px 0px var(--boxshadow-standard);
+    .content-holder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 63rem;
+      margin: 0 auto;
+    }
     &.menu-visible {
       nav {
         transform: translateX(-70vw);
-        box-shadow: -10px 20px 30px 0px rgba(0,0,0,0.15);
+        box-shadow: -10px 20px 30px 0px var(--boxshadow-standard);
       }
       #menu-button {
         &::after {
@@ -114,6 +126,11 @@ export default {
     &#back-button {
       width: 3.5rem;
       text-align: right;
+      transition: opacity 0.3s ease-in-out;
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
       &::before, &::after {
         width: 10px;
       }

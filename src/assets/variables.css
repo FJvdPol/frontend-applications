@@ -8,6 +8,7 @@
   --color-grey: #7e7e7e;
   --color-grey-light: #EEE;
   --color-grey-ultra-light: #F7F7F7;
+  --boxshadow-standard: rgba(108, 99, 255, 0.25);
   --gradient-bg: -webkit-linear-gradient(-45deg, var(--color-gradient-start), var(--color-light));
   --gradient-bg-dark: -webkit-linear-gradient(-45deg, var(--color-dark), var(--color-gradient-start));
   --gradient-opaque: -webkit-linear-gradient(rgba(181, 177, 255, 0) 50%, var(--color-main));

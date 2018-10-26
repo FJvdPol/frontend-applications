@@ -88,6 +88,7 @@ export default {
         margin: 0 1rem;
         transition: all 0.2s ease-in-out;
         font-size: 0.875rem;
+        cursor: pointer;
         &.active-tab {
           color: var(--color-main);
         }

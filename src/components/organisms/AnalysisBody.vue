@@ -6,7 +6,8 @@
         <form @submit.prevent>
           <InputGroup @valueChange="emitChildValue" v-for="(questionObject, index) in splitQuestions(index)" :inputObject="questionObject" :key="index" />
         </form>
-        <Button @click.native="nextPage(index)" :textContent="'volgende'"/>
+        <Button v-if="index < questionsByCategory.length - 1" @click.native="nextPage(index)" :textContent="'volgende'"/>
+        <Button v-if="index === questionsByCategory.length - 1" :textContent="'opslaan'"/>
       </div>
     </section>
   </article>

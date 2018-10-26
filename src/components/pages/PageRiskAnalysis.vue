@@ -31,7 +31,7 @@ export default {
       width: 100%;
       background-color: white;
       padding: 0.5rem 1.5rem;
-      box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.05);
+      box-shadow: 0px -3px 5px 0px var(--boxshadow-standard);
     }
   }
 

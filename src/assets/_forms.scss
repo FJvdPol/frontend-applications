@@ -12,16 +12,16 @@ label, select {
 }
 input, select {
   -webkit-appearance: none;
-  font-size: 1.25rem;
+  font-size: 1rem;
   width: 100%;
   border: 0;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1rem;
   line-height: 1.5;
   background-color: var(--color-grey-light);
   border: 1px solid var(--color-light);
   border-radius: 5px;
   color: var(--color-dark);
-  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 7px 40px -5px var(--boxshadow-standard);
   &:active, &:focus {
     outline: none;
     background-color: var(--color-ultra-light);
@@ -31,9 +31,10 @@ input[type="radio"], input[type="checkbox"] {
   margin-right: 0.75rem;
   -webkit-appearance: none;
   width: 2rem;
+  min-width: 2rem;
   height: 2rem;
   background-color: var(--color-grey-light);
-  border: 1px solid var(--color-main);
+  border: 1px solid var(--color-light);
   border-radius: 5px;
   position: relative;
   &::before {
@@ -54,22 +55,22 @@ input[type="radio"], input[type="checkbox"] {
     color: var(--color-main);
   }
   &:checked {
-    border-color: var(--color-main);
+    background-color: var(--color-main);
+    border-color: transparent;
     &::before {
+      color: white;
       opacity: 1;
       content:"\f00c";
     }
   }
   &:focus {
+    border-color: transparent;
     outline: none;
-    border-color: var(--color-main);
     background-color: var(--color-light);
-    &::before {
-      color: white;
-    }
   }
 }
 .input-group {
+  max-width: 25rem;
   background-color: white;
   padding: .5rem 0 1.5rem;
   margin-bottom: 0.25rem;
@@ -87,8 +88,8 @@ input[type="radio"], input[type="checkbox"] {
     width: 2rem;
     height: 2rem;
     left: auto;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: 0rem;
+    bottom: 0.6rem;
   }
   select, input {
     padding-right: 4rem;
@@ -96,8 +97,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 .select-group {
   &::after {
-    content:"\f063";
-    content:"\f0ab";
+    content:"\f0d7";
   }
 
 }

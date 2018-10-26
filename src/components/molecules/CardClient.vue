@@ -5,11 +5,12 @@
         <img :src="client.img" alt="">
       </figure>
       <figure v-else class="no-img">
-        <img src="/assets/images/undraw_forgot_password.svg" alt="">
+        <img src="/assets/images/undraw_children.svg" alt="">
         <figcaption>Geen foto</figcaption>
       </figure>
       <div class="nav">
-        <h3>{{client.name}}</h3>
+        <h3>{{client.name}} {{client.lastname}}</h3>
+        <i class="fa fa-caret-right"></i>
       </div>
     </router-link>
   </article>
@@ -29,7 +30,7 @@ export default {
     max-width: 20rem;
     margin-bottom: 2rem;
     border-radius: 5px;
-    box-shadow: 0px 10px 40px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 10px 40px -5px var(--boxshadow-standard);
     a {
       text-decoration: none;
     }
@@ -41,6 +42,13 @@ export default {
     }
     .nav {
       padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      i {
+        font-size: 1.5rem;
+        color: var(--color-main);
+      }
     }
     figure {
       position: relative;

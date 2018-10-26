@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <h2>Login</h2>
-      <form class="" action="index.html" method="post">
+      <form class="" @submit.prevent>
         <div class="input-group">
           <label for="name">Gebruikersnaam:</label>
           <input type="text" name="" id="name" value="">
@@ -13,16 +13,19 @@
             <input type="password" name="" id="pass" value="">
           </div>
         </div>
+        <input class="button" type="submit" name="" value="log in">
       </form>
+      <Button :class="'secondary'" :textContent="'or create account'"/>
     </div>
   </main>
 </template>
 
 <script>
+import Button from '../atoms/Button.vue'
 export default {
   name: 'Login',
-  data(){
-    return {}
+  components: {
+    Button
   }
 }
 </script>
@@ -31,5 +34,12 @@ export default {
   .input-group {
     padding-top: 0;
     padding-bottom: 2rem;
+  }
+  input[type="submit"] {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  .button {
+    margin-top: 0;
   }
 </style>

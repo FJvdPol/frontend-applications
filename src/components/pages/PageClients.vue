@@ -21,16 +21,22 @@ export default {
       clients: [
         {
           name: 'Henk',
+          lastname: 'de Vries',
           img: 'https://unsplash.it/400/400',
           info: {
             "Leeftijd": 12,
             "Stad": 'Amsterdam',
             "Postcode": '1112PT',
-            risk: 1.03
-          }
+          },
+          risk: 1.03
         },
-        {name: 'Pieter'},
-        {name: 'Johan'}
+        {
+          name: 'Pieter'
+        },
+        {
+          name: 'Johan',
+          risk: 7.60
+        }
       ]
     }
   },

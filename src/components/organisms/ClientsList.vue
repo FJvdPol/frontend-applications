@@ -31,9 +31,6 @@ export default {
     .client {
       @media screen and (min-width: 42rem) {
         margin-right: 1rem;
-        &:nth-of-type(even){
-          margin-right: 0;
-        }
       }
     }
   }

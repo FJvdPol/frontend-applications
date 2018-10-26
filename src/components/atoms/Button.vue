@@ -1,5 +1,5 @@
 <template>
-  <button type="button" name="button">{{textContent}}</button>
+  <button class="button">{{textContent}}</button>
 </template>
 
 <script>
@@ -12,8 +12,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  button {
+<style lang="scss">
+  .button {
     display: block;
     background: 0;
     background-color: var(--color-dark);
@@ -24,10 +24,22 @@ export default {
     color: white;
     font-weight: 500;
     margin: 3rem auto;
-    box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 12px 40px -5px var(--boxshadow-standard);
     &:focus, &:active {
       outline: none;
       background: var(--color-main);
+    }
+    &.left {
+      margin-left: 0;
+    }
+    &.secondary {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 0 0 0.25rem;
+      border-radius: 0;
+      border-bottom: 2px solid var(--color-light);
+      color: var(--color-light);
+      // box-shadow: none;
     }
   }
 </style>

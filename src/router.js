@@ -5,10 +5,14 @@ import Login from './components/pages/Login.vue'
 import PageClients from './components/pages/PageClients.vue'
 import SingleClient from './components/templates/SingleClient.vue'
 import PageRiskAnalysis from './components/pages/PageRiskAnalysis.vue'
+import PageNotFound from './components/pages/PageNotFound.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: [
     {
       path: '/',
@@ -34,6 +38,9 @@ export default new Router({
       path: '/risico-analyse',
       name: 'PageRiskAnalysis',
       component: PageRiskAnalysis
-    }
+    },
+
+    { path: '/page-not-found', component: PageNotFound },
+    { path: '*', redirect: '/page-not-found' }
   ]
 })

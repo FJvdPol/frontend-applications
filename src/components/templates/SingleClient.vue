@@ -1,30 +1,37 @@
 <template>
   <main id="single-client">
-    <div class="header" v-bind:style="client.img ? 'background-image: url('+client.img+');' : 'background-image: url(../assets/images/undraw_forgot_password.svg)'">
+    <div class="header" v-bind:style="client.img ? 'background-image: url('+client.img+');' : 'background-image: url(../assets/images/undraw_children.svg)'">
       <h2>{{client.name}}</h2>
     </div>
     <TabNavigation :tabs="categories" />
     <article class="tab-page-holder">
       <section v-for="(category, index) in categories" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
         <div class="container">
-          <div class="algemeen" v-if="index == 0 && client.info">
-            <ul class="list" >
+          <div class="algemeen normal-content" v-if="index == 0">
+            <ul class="list" v-if="client.info" >
               <li v-for="(value, key, i) in client.info" v-if="key != 'risk'" :key="i">
                 <h3>{{key}}</h3>
                 <p>{{value}}</p>
               </li>
             </ul>
+
+            <div v-if="!client.info">
+              <h3 class="center">Er is geen algemene data bekend over deze persoon.</h3>
+              <img src="/assets/images/undraw_blank_canvas.svg" alt="">
+            </div>
           </div>
-          <div class="risicoindicatie" v-if="index == 1 && client.info">
-            <ul class="list" >
-              <RiskIndication :percentage="client.info.risk"/>
+          <div class="risicoindicatie" v-if="index == 1">
+            <ul class="list" v-if="client.risk" >
+              <RiskIndication :percentage="client.risk"/>
               <Button :textContent="'indicatie bijstellen'"/>
             </ul>
+
+            <div v-if="!client.risk" class="normal-content">
+              <h3 class="center">Er is geen risicoindicatie bekend over deze persoon.</h3>
+              <img src="/assets/images/undraw_blank_canvas.svg" alt="">
+            </div>
           </div>
-          <div v-if="!client.info">
-            <h3 class="center">Er is geen data over deze persoon.</h3>
-            <img src="/assets/images/undraw_blank_canvas.svg" alt="">
-          </div>
+
         </div>
       </section>
     </article>
@@ -104,18 +111,6 @@ export default {
         text-transform: capitalize;
       }
     }
-    h3 {
-      color: var(--color-grey);
-      font-weight: normal;
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-    }
-    p {
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-top: 0;
-      color: var(--color-main);
-    }
     figure {
       width: 100%;
       overflow: hidden;
@@ -136,7 +131,7 @@ export default {
       img {
         display: block;
         width: 70%;
-        margin: 5rem auto 0;
+        margin: 3rem auto 0;
       }
     }
     .list {
@@ -147,7 +142,20 @@ export default {
         margin: 1rem 0;
         width: 100%;
       }
-
+    }
+    .normal-content {
+      h3 {
+        color: var(--color-grey);
+        font-weight: normal;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+      p {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-top: 0;
+        color: var(--color-main);
+      }
     }
   }
 
