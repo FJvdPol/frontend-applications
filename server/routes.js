@@ -1,11 +1,20 @@
 const db = require('./db/index')
+const bcrypt = require('bcrypt')
 
 module.exports = (server) => {
 
   server.post('/register', async (req, res) => {
     if (req.body.user) {
       try {
-        const user = await db.user.create(req.body.user)
+        const {name, email, pass} = req.body.user
+        const hash = await bcrypt.hash(pass, 10)
+        const user = await db.user.create({
+          name: name,
+          email: email,
+          pass: hash
+        })
+        req.session.user = user.dataValues
+        console.log(req.session.user);
         res.send('user created')
       } catch (err) {
         res.status(400).send({
@@ -34,12 +43,16 @@ module.exports = (server) => {
             error: 'Kon geen account vinden met dit emailadres'
           })
         }
-        if (user.pass !== pass){
+        const correctPass = await bcrypt.compare(pass, user.pass)
+        if (!correctPass){
           return res.status(401).send({
             error: 'Onjuist wachtwoord'
           })
         }
         // session user
+        req.session.user = user.dataValues
+        delete req.session.user.pass
+        console.log(req.session.user);
         const userJson = user.toJSON()
         res.send({
           user: userJson
