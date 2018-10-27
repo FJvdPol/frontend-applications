@@ -5,15 +5,15 @@
       <form class="" @submit.prevent>
         <div class="input-group">
           <label for="name">Gebruikersnaam:</label>
-          <input type="text" name="" id="name" value="">
+          <input v-model="name" type="text" name="" id="name" value="">
         </div>
         <div class="input-group">
           <div class="pass-group">
             <label for="pass">Wachtwoord:</label>
-            <input type="password" name="" id="pass" value="">
+            <input v-model="pass" type="password" name="" id="pass" value="">
           </div>
         </div>
-        <input class="button" type="submit" name="" value="registreren">
+        <input @click="registerUser" class="button" type="submit" value="registreren">
       </form>
     </div>
   </main>
@@ -21,10 +21,26 @@
 
 <script>
 import Button from '../atoms/Button.vue'
+import Authenticator from '../../services/authentication.js'
+
 export default {
   name: 'Register',
   components: {
     Button
+  },
+  data(){
+    return {
+      name: '',
+      pass: ''
+    }
+  },
+  methods: {
+    registerUser() {
+      Authenticator.register({
+        name: this.name,
+        pass: this.pass
+      })
+    }
   }
 }
 </script>
