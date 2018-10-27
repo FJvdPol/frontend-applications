@@ -18,7 +18,6 @@ server.use(cors())
 
 initRoutes(server)
 
-
 sequelize.sync()
   .then(() => {
     server.listen(config.port)

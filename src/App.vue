@@ -61,15 +61,8 @@ export default {
     outline: none;
   }
   p {
-    color: var(--color-grey)
-  }
-  input.error + p {
-    margin-top: 1.5rem;
-  }
-  .error {
-    color: var(--color-error);
-    background-color: var(--color-ultra-light);
-    border-color: var(--color-error);
+    color: var(--color-grey);
+    line-height: 1.5;
   }
   .center {
     text-align: center;

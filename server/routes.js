@@ -6,6 +6,7 @@ module.exports = (server) => {
     if (req.body.user) {
       try {
         const user = await db.user.create(req.body.user)
+        res.send('user created')
       } catch (err) {
         res.status(400).send({
           error: 'Dit emailadres is al in gebruik'
@@ -22,27 +23,34 @@ module.exports = (server) => {
   server.post('/login', async (req, res) => {
     if (req.body.user) {
       try {
-        const user = await db.user.findAll({
+        const {email, pass} = req.body.user
+        const user = await db.user.findOne({
           where: {
-            email: req.body.user.email
+            email: email
           }
         })
-        if (user.length > 0){
-          res.send(user)
-        } else {
-          res.status(404).send({
+        if (!user) {
+          return res.status(404).send({
             error: 'Kon geen account vinden met dit emailadres'
           })
         }
+        if (user.pass !== pass){
+          return res.status(401).send({
+            error: 'Onjuist wachtwoord'
+          })
+        }
+        // session user
+        const userJson = user.toJSON()
+        res.send({
+          user: userJson
+        })
       } catch (err) {
-        res.status(400).send({
+        res.status(500).send({
           error: 'Er ging iets fout'
         })
       }
     } else {
-      res.status(400).send({
-        error: 'Not enough parameters'
-      })
+      res.status(400).send()
     }
 
   })

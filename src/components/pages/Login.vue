@@ -3,15 +3,16 @@
     <div class="container">
       <h2>Login</h2>
       <form class="" @submit.prevent>
-        <div class="input-group">
+        <div :class="error.email ? 'input-group error' : 'input-group'">
           <label for="email">Email:</label>
-          <input v-model="user.email" @focus="error.email = false" :class="error.email ? 'error' : ''" type="text" name="" id="email" value="">
+          <input v-model="user.email" @focus="error.email = false" type="text" name="" id="email" value="">
           <p v-if="response.status == 404 && error.email">{{response.data.error}}</p>
         </div>
-        <div class="input-group">
+        <div :class="error.pass ? 'input-group error' : 'input-group'">
           <div class="pass-group">
             <label for="pass">Wachtwoord:</label>
-            <input v-model="user.pass" type="password" name="" id="pass" value="">
+            <input v-model="user.pass" @focus="error.pass = false" type="password" name="" id="pass" value="">
+            <p v-if="response.status == 401 && error.pass">{{response.data.error}}</p>
           </div>
         </div>
         <input @click="login" class="button" type="submit" name="" value="log in">
@@ -35,7 +36,8 @@ export default {
         pass: ''
       },
       error: {
-        email: false
+        email: false,
+        pass: false
       },
       response: ''
     }
@@ -46,16 +48,22 @@ export default {
   methods: {
     async login() {
       if (this.user.email && this.user.pass){
-        const response = await Authenticator.login({
-          user: {
-            email: this.user.email,
-            pass: this.user.pass
-          }
+        try {
+          const response = await Authenticator.login({
+            user: {
+              email: this.user.email,
+              pass: this.user.pass
+            }
 
-        })
-        response.status == 404 ? this.error.email = true : this.error.email = false
-        this.response = response
-        response.status == 200 ? this.$router.push({name: 'home'}) : ''
+          })
+          this.response = response
+          response.status == 200 ? this.$router.push({name: 'home'}) : ''
+        } catch (e) {
+          e.response.status == 404 ? this.error.email = true : false
+          e.response.status == 401 ? this.error.pass = true : false
+          this.response = e.response
+        }
+
       }
     }
   }
