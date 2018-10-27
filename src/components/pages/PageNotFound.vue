@@ -5,7 +5,7 @@
       <h2>Oeps!</h2>
       <h3>Het lijkt erop dat je verdwaald bent...</h3>
       <img src="/assets/images/undraw_lost.svg" alt="">
-      <router-link to="/">
+      <router-link :to="{name: 'home'}">
         <Button :textContent="'naar home'"/>
       </router-link>
     </div>

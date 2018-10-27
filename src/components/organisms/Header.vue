@@ -2,7 +2,7 @@
   <header v-bind:class="{'menu-visible': menuVisible}">
     <div class="content-holder">
       <button id="back-button" :class="$route.path === '/' ? 'hidden' : ''" v-on:click="$router.go(-1)">vorige</button>
-      <h1><router-link :to="{ name: 'Home', params: {} }">Kind veilig thuis</router-link></h1>
+      <h1><router-link :to="{name: 'home'}">Kind veilig thuis</router-link></h1>
       <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
       <nav>
         <ul class="top">
@@ -94,6 +94,9 @@ export default {
         }
       }
     }
+  }
+  a {
+    outline: none;
   }
   button {
     width: 4rem;

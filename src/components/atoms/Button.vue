@@ -16,10 +16,9 @@ export default {
   .button {
     display: block;
     background: 0;
-    background-color: var(--color-dark);
     background: var(--gradient-bg);
     border: 0;
-    border-radius: 25px;
+    border-radius: 100px;
     padding: 1rem 2.5rem;
     color: white;
     font-weight: 500;
@@ -27,7 +26,7 @@ export default {
     box-shadow: 0px 12px 40px -5px var(--boxshadow-standard);
     &:focus, &:active {
       outline: none;
-      background: var(--color-main);
+      background: var(--color-light);
     }
     &.left {
       margin-left: 0;

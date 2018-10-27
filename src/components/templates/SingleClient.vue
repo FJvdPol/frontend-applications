@@ -1,6 +1,6 @@
 <template>
   <main id="single-client">
-    <div class="header" v-bind:style="client.img ? 'background-image: url('+client.img+');' : 'background-image: url(../assets/images/undraw_children.svg)'">
+    <div class="header" :class="!client.img ? 'no-img' : ''" :style="client.img ? 'background-image: url('+client.img+');' : ''">
       <h2>{{client.name}}</h2>
     </div>
     <TabNavigation :tabs="categories" />
@@ -74,7 +74,7 @@ export default {
       background: var(--color-main);
     }
     .header {
-      min-height: 10rem;
+      min-height: 9rem;
       display: flex;
       align-items: flex-end;
       padding: 0 1.5rem;
@@ -83,6 +83,9 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       position: relative;
+      &.no-img {
+        min-height: 5rem;
+      }
       &::after {
         content: "";
         width: 100%;
@@ -109,18 +112,6 @@ export default {
     h2 {
       span {
         text-transform: capitalize;
-      }
-    }
-    figure {
-      width: 100%;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-
       }
     }
 

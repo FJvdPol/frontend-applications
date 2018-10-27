@@ -45,6 +45,11 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  button {
+    background: 0;
+    border: 0;
+    padding: 0;
+  }
   h2 {
     color: var(--color-main);
     font-size: 2.5rem;
@@ -53,6 +58,7 @@ export default {
   }
   a {
     text-decoration: none;
+    outline: none;
   }
   p {
     color: var(--color-grey)

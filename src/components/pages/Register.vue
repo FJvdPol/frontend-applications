@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <h2>Login</h2>
+      <h2>Registreren</h2>
       <form class="" @submit.prevent>
         <div class="input-group">
           <label for="name">Gebruikersnaam:</label>
@@ -13,11 +13,8 @@
             <input type="password" name="" id="pass" value="">
           </div>
         </div>
-        <input class="button" type="submit" name="" value="log in">
+        <input class="button" type="submit" name="" value="registreren">
       </form>
-      <router-link :to="{name: 'register'}">
-        <Button :class="'secondary'" :textContent="'nog geen account?'"/>
-      </router-link>
     </div>
   </main>
 </template>
@@ -25,7 +22,7 @@
 <script>
 import Button from '../atoms/Button.vue'
 export default {
-  name: 'Login',
+  name: 'Register',
   components: {
     Button
   }

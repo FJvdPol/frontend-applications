@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './components/pages/Home.vue'
 import Login from './components/pages/Login.vue'
+import Register from './components/pages/Register.vue'
 import PageClients from './components/pages/PageClients.vue'
 import SingleClient from './components/templates/SingleClient.vue'
 import PageRiskAnalysis from './components/pages/PageRiskAnalysis.vue'
@@ -16,27 +17,32 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      name: 'home',
       component: Home
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
+      path: '/registeren',
+      name: 'register',
+      component: Register
+    },
+    {
       path: '/clienten',
-      name: 'PageClients',
+      name: 'clients',
       component: PageClients
     },
     {
       path: '/clienten/:name',
-      name: 'SingleClient',
+      name: 'singleclient',
       component: SingleClient
     },
     {
       path: '/risico-analyse',
-      name: 'PageRiskAnalysis',
+      name: 'riskanalysis',
       component: PageRiskAnalysis
     },
 

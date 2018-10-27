@@ -22,7 +22,7 @@ export default {
         {
           name: 'Henk',
           lastname: 'de Vries',
-          img: 'https://unsplash.it/400/400',
+          img: '/assets/images/test_person_image.jpg',
           info: {
             "Leeftijd": 12,
             "Stad": 'Amsterdam',

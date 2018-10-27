@@ -59,6 +59,9 @@ export default {
       background-color: var(--color-light);
       &.no-img {
         position: relative;
+        &::after {
+          opacity: 0.9;
+        }
         img {
           opacity: 0.5;
         }
@@ -69,6 +72,8 @@ export default {
           width: 100%;
           color: white;
           text-align: center;
+          z-index: 1;
+          color: var(--color-ultra-light);
         }
       }
       &::after {
@@ -82,13 +87,14 @@ export default {
         background-color: var(--color-gradient-start);
         background: var(--gradient-opaque);
         z-index: 0;
+        opacity: 0.5;
       }
     }
     img {
-
       object-fit: cover;
       width: 100%;
       height: 100%;
+      opacity: 0.9;
     }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <nav id="tab-nav">
     <ul>
-      <li v-for="(tab, index) in tabs" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''">{{tab}}</li>
+      <li v-for="(tab, index) in tabs" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''"><button>{{tab}}</button></li>
     </ul>
     <div id="tab-bg"></div>
   </nav>
@@ -73,24 +73,39 @@ export default {
   #tab-nav {
     position: relative;
     background: var(--gradient-bg);
-    color: var(--color-ultra-light);
-    overflow-x: scroll;
+    overflow-x: auto;
+    height: 4rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     ul {
       padding: 0;
       margin: 0;
       display: flex;
+      height: 100%;
       li {
-        height: 4rem;
-        padding-top: 2.4rem;
-        position: relative;
-        z-index: 1;
-        white-space: nowrap;
+        align-self: stretch;
         margin: 0 1rem;
-        transition: all 0.2s ease-in-out;
-        font-size: 0.875rem;
-        cursor: pointer;
+        button {
+          color: var(--color-ultra-light);
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+          height: 100%;
+          padding-top: 1.9rem;
+          position: relative;
+          z-index: 1;
+          white-space: nowrap;
+          transition: all 0.2s ease-in-out;
+          font-size: 0.875rem;
+          cursor: pointer;
+          &:focus {
+            color: var(--color-main);
+          }
+        }
         &.active-tab {
-          color: var(--color-main);
+          button{
+            color: var(--color-main);
+          }
         }
         &:first-of-type {
           margin-left: 2.5rem;
