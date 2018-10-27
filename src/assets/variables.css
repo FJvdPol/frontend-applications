@@ -2,13 +2,17 @@
   --color-main: #6C63FF; /* #40C4FF; */
   --color-dark:  #463AFF; /* #0091EA; */
   --color-accent: #06D19C;
-  --color-gradient-start: var(--color-accent);/* #00E676; */
+  --color-error: #ff6c63;
   --color-light: #b5b1ff; /* #80D8FF; */
   --color-ultra-light: #f0efff /* #E1F5FE */;
+
   --color-grey: #7e7e7e;
   --color-grey-light: #EEE;
   --color-grey-ultra-light: #F7F7F7;
+
   --boxshadow-standard: rgba(108, 99, 255, 0.25);
+
+  --color-gradient-start: var(--color-accent);/* #00E676; */
   --gradient-bg: -webkit-linear-gradient(-45deg, var(--color-gradient-start), var(--color-light));
   --gradient-bg-dark: -webkit-linear-gradient(-45deg, var(--color-dark), var(--color-gradient-start));
   --gradient-opaque: -webkit-linear-gradient(rgba(181, 177, 255, 0), var(--color-main));

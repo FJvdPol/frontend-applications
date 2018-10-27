@@ -1,11 +1,14 @@
-const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const multer = require('multer')
 const cors = require('cors')
+const {sequelize} = require('./db')
+const env = require('dotenv')
 
 const config = require('./config')
 const initRoutes = require('./routes')
+
+env.config()
 
 const server = express()
 
@@ -16,6 +19,8 @@ server.use(cors())
 initRoutes(server)
 
 
-
-
-server.listen(config.port)
+sequelize.sync()
+  .then(() => {
+    server.listen(config.port)
+    console.log('server running at port: '+ config.port);
+  })

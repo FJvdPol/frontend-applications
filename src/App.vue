@@ -63,6 +63,14 @@ export default {
   p {
     color: var(--color-grey)
   }
+  input.error + p {
+    margin-top: 1.5rem;
+  }
+  .error {
+    color: var(--color-error);
+    background-color: var(--color-ultra-light);
+    border-color: var(--color-error);
+  }
   .center {
     text-align: center;
   }
