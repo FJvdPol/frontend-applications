@@ -4,7 +4,8 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const cors = require('cors')
 
-const port = 8081
+const config = require('./config')
+const initRoutes = require('./routes')
 
 const server = express()
 
@@ -12,9 +13,9 @@ server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(cors())
 
-server.post('/register', (req, res) => {
-  console.log(req.body.name, req.body.pass);
-})
+initRoutes(server)
 
 
-server.listen(port)
+
+
+server.listen(config.port)

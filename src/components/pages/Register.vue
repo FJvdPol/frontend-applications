@@ -35,11 +35,12 @@ export default {
     }
   },
   methods: {
-    registerUser() {
-      Authenticator.register({
+    async registerUser() {
+      const response = await Authenticator.register({
         name: this.name,
         pass: this.pass
       })
+      console.log(response.data);
     }
   }
 }
