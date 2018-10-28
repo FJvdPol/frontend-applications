@@ -13,10 +13,13 @@ module.exports = (server) => {
           email: email,
           pass: hash
         })
-        req.session.user = user.dataValues
-        console.log(req.session.user);
-        res.send('user created')
+        delete user.dataValues.pass
+        const userJson = user.toJSON()
+        res.send({
+          user: userJson
+        })
       } catch (err) {
+        console.log(err);
         res.status(400).send({
           error: 'Dit emailadres is al in gebruik'
         })
@@ -50,14 +53,13 @@ module.exports = (server) => {
           })
         }
         // session user
-        req.session.user = user.dataValues
-        delete req.session.user.pass
-        console.log(req.session.user);
+        delete user.dataValues.pass
         const userJson = user.toJSON()
         res.send({
           user: userJson
         })
       } catch (err) {
+        console.log(err);
         res.status(500).send({
           error: 'Er ging iets fout'
         })

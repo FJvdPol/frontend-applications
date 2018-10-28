@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
 )
 
 db.user = sequelize.import('./models/User.js')
+db.client = sequelize.import('./models/Client.js')
 
 db.sequelize = sequelize
 

@@ -18,7 +18,11 @@
         </ul>
         <ul class="bottom">
           <li> <i class="fa fa-info-circle"></i> </li>
-          <li>Ingelogd als: NAAM</li>
+          <li @click="logOut" v-if="$store.state.user">Ingelogd als: {{$store.state.user.name}}</li>
+          <router-link v-else :to="{ name: 'login' }">
+            <li>log in</li>
+          </router-link>
+
 
         </ul>
       </nav>
@@ -33,7 +37,7 @@ export default {
   name: 'Header',
   data() {
     return {
-      menuVisible: false,
+      menuVisible: false
     }
   },
   methods: {
@@ -44,7 +48,12 @@ export default {
         this.menuVisible = true
       }
     },
-
+    logOut() {
+      sessionStorage.clear()
+      this.$store.dispatch('logOut')
+      this.menuVisible = false;
+      this.$router.push({name: 'home'})
+    }
   },
   watch: {
   '$route' () {

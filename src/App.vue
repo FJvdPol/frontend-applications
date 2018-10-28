@@ -59,6 +59,7 @@ export default {
   a {
     text-decoration: none;
     outline: none;
+    color: inherit;
   }
   p {
     color: var(--color-grey);

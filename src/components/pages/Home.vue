@@ -4,7 +4,7 @@
       <h2>Kind veilig thuis</h2>
       <h3>Risico analyse app</h3>
       <img src="/assets/images/undraw_data_report.svg" alt="">
-      <router-link :to="{name: 'login'}">
+      <router-link v-if="!$store.state.user" :to="{name: 'login'}">
         <Button :textContent="'log in'"/>
       </router-link>
     </div>

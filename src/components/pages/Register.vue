@@ -63,6 +63,7 @@ export default {
           })
           this.response = response
           response.status == 200 ? this.$router.push({name: 'home'}) : ''
+          this.$store.dispatch('setUser', response.data.user)
         } catch (e) {
           e.response.status == 400 ? this.error.email = true : this.error.email = false
           this.response = e.response

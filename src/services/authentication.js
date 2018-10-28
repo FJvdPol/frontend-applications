@@ -6,5 +6,8 @@ export default {
   },
   login(user) {
     return connector().post('/login', user)
+  },
+  logout(user) {
+    return connector().post('/logout')
   }
 }

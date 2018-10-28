@@ -57,8 +57,11 @@ export default {
 
           })
           this.response = response
-          response.status == 200 ? this.$router.push({name: 'home'}) : ''
+          this.$store.dispatch('setUser', response.data.user)
+          sessionStorage.setItem('user', JSON.stringify(response.data.user));
+          this.$router.push({name: 'home'})
         } catch (e) {
+          console.log(e);
           e.response.status == 404 ? this.error.email = true : false
           e.response.status == 401 ? this.error.pass = true : false
           this.response = e.response
