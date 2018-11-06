@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) =>
     lastname: {
       type: DataTypes.STRING
     },
-    email: {
-      type: DataTypes.STRING
-    },
     img: {
       type: DataTypes.STRING
     },
     risk: {
       type: DataTypes.SMALLINT
+    },
+    formdata: {
+      type: DataTypes.STRING
     }
   })

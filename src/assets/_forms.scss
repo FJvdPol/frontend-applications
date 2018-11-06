@@ -5,7 +5,8 @@ form p {
 label {
   margin-top: 0;
   color: var(--color-grey);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 label, select {
   display: block;
@@ -109,7 +110,7 @@ input[type="radio"], input[type="checkbox"] {
     height: 2rem;
     left: auto;
     right: 0rem;
-    top: 2.9rem;
+    bottom: 0.6rem;
   }
   select, input {
     padding-right: 4rem;

@@ -33,7 +33,8 @@ export default {
   }
   @media screen and (min-width: 60rem){
     img {
-      margin: 6rem 0 0;
+      width: 15rem;
+      margin: 4rem 0;
     }
   }
 

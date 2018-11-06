@@ -3,60 +3,65 @@
     <ul>
       <li v-for="(tab, index) in tabs" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''"><button>{{tab}}</button></li>
     </ul>
-    <div id="tab-bg"></div>
+    <div v-if="tabs.length > 0" id="tab-bg"></div>
   </nav>
 
 </template>
 
 <script>
 import { TweenLite } from 'gsap/all'
-import EventBus from '../../event-bus.js'
+// import store from '../../store/store.js'
 
 export default {
   name: 'AnalysisNavigation',
-  props: ['tabs', 'listenTo'],
-  mounted() {
-    EventBus.$on(this.listenTo, index => {
+  props: ['tabs'],
+  computed: {
+    index() {
+      return this.$store.state.formindex
+    }
+  },
+  watch: {
+    tabs() {
+      this.changeActiveTab(0)
+    },
+    index(index) {
       this.changeActiveTab(index)
-    })
+    }
   },
   methods: {
     changeActiveTab(index) {
       let allTabs = document.querySelectorAll('#tab-nav li')
-      let bg = document.querySelector('#tab-bg')
-      let allPages = document.querySelectorAll('.tab-page')
-      let newElWidth, newElLeft, timing
-      if (index === allTabs.length){
+      if (index === allTabs.length || !allTabs[index]){
         return false
       }
       let activeTab = allTabs[index]
-
-      // get offsets for animation
-      if (index === allTabs.length - 1) {
-        newElWidth = activeTab.offsetWidth / 16 - 0.5 + 'rem'
-      } else {
-        newElWidth = activeTab.offsetWidth / 16 + 2 + 'rem'
-      }
-      newElLeft = activeTab.offsetLeft - 40 + 'px'
-
-
+      this.animateTabNav(activeTab, allTabs, index)
+    },
+    animateTabNav(activeTab, allTabs, index) {
       // start animation phase
       // set timing for easing to scrolltop if page has been scrolled
-      timing = window.scrollY > 0 ? 0.5 : 0
+      let timing = window.scrollY > 0 ? 0.5 : 0
+      let allPages = document.querySelectorAll('.tab-page')
+      if (allPages.length !== allTabs.length) {
+        return false
+      }
+
       // scroll to top of page
       TweenLite.to(window, timing, {scrollTo: {y:0}, autoKill:true, onComplete: () => {
 
-        TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
 
         // toggle active class
-        allTabs.forEach((tabInstance, index) => {
-          tabInstance.classList.remove('active-tab')
-          allPages[index].classList.remove('active-page')
-          if (tabInstance === activeTab) {
-            allPages[index].classList.add('active-page')
-          }
-        })
+        if (allTabs.length > 1) {
+          allTabs.forEach((tabInstance, tabIndex) => {
+            tabInstance.classList.remove('active-tab')
+            allPages[tabIndex].classList.remove('active-page')
+            if (tabInstance === activeTab) {
+              allPages[tabIndex].classList.add('active-page')
+            }
+          })
+        }
         activeTab.classList.add('active-tab')
+        this.changeNavBg(activeTab, allTabs, index)
 
         // scroll container to get active tab in view
         let center = (window.innerWidth - activeTab.offsetWidth) / 2
@@ -64,6 +69,19 @@ export default {
         TweenLite.to(container, 0.3, {scrollTo: {x:activeTab.offsetLeft, offsetX:center}})
       }})
 
+    },
+    changeNavBg(activeTab, allTabs, index) {
+      let bg = document.querySelector('#tab-bg')
+      let newElWidth, newElLeft
+      // get offsets for animation
+      if (index == (allTabs.length - 1)) {
+        newElWidth = activeTab.offsetWidth / 16 - 0.5 + 'rem'
+      } else {
+        newElWidth = activeTab.offsetWidth / 16 + 2 + 'rem'
+      }
+      newElLeft = activeTab.offsetLeft - 40 + 'px'
+
+      TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
     }
   }
  }
@@ -72,7 +90,7 @@ export default {
 <style lang="scss" scoped>
   #tab-nav {
     position: relative;
-    background: var(--gradient-bg);
+    background: var(--color-dark);
     overflow-x: auto;
     height: 4rem;
     &::-webkit-scrollbar {
@@ -86,12 +104,14 @@ export default {
       li {
         align-self: stretch;
         margin: 0 1rem;
+        display: flex;
+        align-items: flex-end;
         button {
           color: var(--color-ultra-light);
           outline: none;
           -webkit-tap-highlight-color: transparent;
           height: 100%;
-          padding-top: 1.9rem;
+          height: 2.1rem;
           position: relative;
           z-index: 1;
           white-space: nowrap;

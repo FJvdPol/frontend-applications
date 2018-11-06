@@ -1,6 +1,6 @@
 <template>
   <main id="risk-analysis">
-    <FormRiskAnalysis />
+    <form-risk-analysis />
   </main>
 </template>
 

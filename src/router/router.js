@@ -11,6 +11,14 @@ import store from '../store/store'
 
 Vue.use(Router)
 
+const checkLogin = (to, from, next) => {
+  if (!store.state.user && !sessionStorage.getItem('user')) {
+    next({name: 'login'})
+  } else {
+    next()
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -30,23 +38,29 @@ const routes = [
   {
     path: '/clienten',
     name: 'clients',
-    component: PageClients
+    component: PageClients,
+    beforeEnter: checkLogin
   },
   {
-    path: '/clienten/:name',
+    path: '/clienten/:id',
     name: 'singleclient',
-    component: SingleClient
+    component: SingleClient,
+    beforeEnter: checkLogin
   },
   {
     path: '/risico-analyse',
     name: 'riskanalysis',
-    component: PageRiskAnalysis
+    component: PageRiskAnalysis,
+    beforeEnter: checkLogin
   },
 
-  { path: '/page-not-found', component: PageNotFound },
+  {
+    path: '/page-not-found',
+    name: 'page-not-found',
+    component: PageNotFound
+  },
   { path: '*', redirect: '/page-not-found' }
 ]
-
 
 const router = new Router({
   routes,

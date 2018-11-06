@@ -5,16 +5,16 @@
       <h1><router-link :to="{name: 'home'}">Kind veilig thuis</router-link></h1>
       <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
       <nav>
-        <ul class="top">
+        <ul class="top" @click="toggleMenu">
           <router-link tag="li" to="/">
             <a>Home</a>
           </router-link>
           <router-link tag="li" to="/clienten">
             <a>Cliënten</a>
           </router-link>
-          <router-link tag="li" to="/risico-analyse">
+          <!-- <router-link tag="li" to="/risico-analyse">
             <a>Risico Analyse</a>
-          </router-link>
+          </router-link> -->
         </ul>
         <ul class="bottom">
           <li> <i class="fa fa-info-circle"></i> </li>
@@ -79,7 +79,8 @@ export default {
     font-size: 0.875rem;
     background-color: var(--color-dark);
     z-index: 2;
-    box-shadow: 0px 3px 5px 0px var(--boxshadow-standard);
+    box-shadow: 0px 3px 5px 0px var(--boxshadow-dark);
+    transition: all 0.5s ease-in-out;
     .content-holder {
       display: flex;
       justify-content: center;
@@ -90,7 +91,7 @@ export default {
     &.menu-visible {
       nav {
         transform: translateX(-70vw);
-        box-shadow: -10px 20px 30px 0px var(--boxshadow-standard);
+        box-shadow: -10px 20px 30px 0px var(--boxshadow-dark);
       }
       #menu-button {
         &::after {
@@ -237,16 +238,39 @@ export default {
   @media screen and (min-width: 40rem){
     header {
       nav {
-        width: 20rem;
+        width: 10rem;
       }
       &.menu-visible {
         nav {
-          transform: translateX(-20rem);
+          transform: translateX(-10rem);
         }
 
       }
     }
 
+
+  }
+  @media screen and (min-width: 60rem){
+    header {
+      width: 10rem;
+      box-shadow: none;
+      nav {
+        left: 0;
+        transform: translateX(0);
+        right: auto;
+        box-shadow: none;
+        background: var(--color-dark)
+      }
+      #menu-button, #back-button {
+        display: none;
+      }
+      &.menu-visible {
+        nav {
+          transform: translateX(0);
+        }
+
+      }
+    }
 
   }
 </style>

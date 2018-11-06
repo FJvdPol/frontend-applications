@@ -17,10 +17,14 @@ export default {
     display: block;
     background: 0;
     background: var(--gradient-bg);
+    // background: white;
     border: 0;
+    // border: 1px solid var(--color-light);
     border-radius: 100px;
     padding: 1rem 2.5rem;
     color: white;
+    // color: var(--color-light);
+
     font-weight: 500;
     margin: 3rem auto;
     box-shadow: 0px 12px 40px -5px var(--boxshadow-standard);

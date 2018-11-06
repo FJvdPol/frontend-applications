@@ -1,6 +1,6 @@
 <template >
   <article class="client">
-    <router-link :to="{ path: client.name, query: { client }}" append>
+    <router-link :to="{ path: String(client.id) }" append>
       <figure v-if="client.img">
         <img :src="client.img" alt="">
       </figure>
@@ -35,6 +35,7 @@ export default {
       text-decoration: none;
     }
     h3 {
+      text-transform: capitalize;
       margin: 0;
       font-size: 16px;
       font-weight: 500;

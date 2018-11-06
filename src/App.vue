@@ -33,11 +33,14 @@ export default {
     padding: 1.5rem;
     padding-top: calc(4rem + 3.125rem);
     min-height: 100%;
-    max-width: 69rem;
     margin: 0 auto;
     @media screen and (min-width: 40rem){
+      margin: 0 3rem;
       padding-left: 3rem;
       padding-right: 3rem;
+    }
+    @media screen and (min-width: 60rem){
+      padding-top: 4rem;
     }
   }
   #app {
@@ -67,6 +70,19 @@ export default {
   }
   .center {
     text-align: center;
+  }
+  figure {
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  @media screen and (min-width: 60rem) {
+    main {
+      padding-left: 10rem;
+    }
   }
 
 </style>

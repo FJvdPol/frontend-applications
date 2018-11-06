@@ -22,7 +22,7 @@ server.use(cors())
 
 initRoutes(server)
 
-sequelize.sync()
+sequelize.sync({force: false})
   .then(() => {
     server.listen(config.port)
     console.log('server running at port: '+ config.port);

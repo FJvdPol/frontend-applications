@@ -2,7 +2,9 @@
   <main>
     <div class="container">
       <h2>Cliënten</h2>
-      <ClientsList :clients="clients"/>
+      <p v-if="clients == null && !error">Cliëntenlijst aan het laden....</p>
+      <p v-if="error">Iets ging fout: {{error.status}} {{error.message}}</p>
+      <clients-list :clients="clients"/>
       <!-- <AddClientBar /> -->
     </div>
 
@@ -13,31 +15,28 @@
 <script>
 import ClientsList from '../organisms/ClientsList.vue'
 import AddClientBar from '../atoms/AddClientBar.vue'
+import ClientService from '../../services/client-service.js'
 
 export default {
   name: 'PageClients',
   data(){
     return {
-      clients: [
-        {
-          name: 'Henk',
-          lastname: 'de Vries',
-          img: '/assets/images/test_person_image.jpg',
-          info: {
-            "Leeftijd": 12,
-            "Stad": 'Amsterdam',
-            "Postcode": '1112PT',
-          },
-          risk: 1.03
-        },
-        {
-          name: 'Pieter'
-        },
-        {
-          name: 'Johan',
-          risk: 7.60
-        }
-      ]
+      clients: null,
+      error: null
+    }
+  },
+  async mounted() {
+    try {
+      this.clients = (await ClientService.getAll()).data.clients
+    } catch (e) {
+      if (e.response){
+        this.error = {}
+        this.error.status = e.response.status
+        this.error.message = e.response.data.error
+      } else {
+        console.log(e);
+      }
+
     }
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
   <div class="clients-list">
-    <CardClient v-for="(client, index) in clients" :client="client"  :key="index"/>
+    <card-client v-for="(client, index) in clients" :client="client"  :key="index"/>
   </div>
 </template>
 

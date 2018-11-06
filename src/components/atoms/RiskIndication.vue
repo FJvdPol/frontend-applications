@@ -49,6 +49,7 @@ export default {
     }
   }
   p {
+    margin: 0;
     color: var(--color-grey);
     font-size: 0.875rem;
     max-width: 7rem;

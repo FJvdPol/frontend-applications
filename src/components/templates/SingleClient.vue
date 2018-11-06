@@ -3,11 +3,25 @@
     <div class="header" :class="!client.img ? 'no-img' : ''" :style="client.img ? 'background-image: url('+client.img+');' : ''">
       <h2>{{client.name}}</h2>
     </div>
-    <TabNavigation :tabs="categories" />
+    <tab-navigation :tabs="categories" />
     <article class="tab-page-holder">
       <section v-for="(category, index) in categories" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
         <div class="container">
-          <div class="algemeen normal-content" v-if="index == 0">
+          <div class="risicoindicatie" v-if="index == 0">
+            <div class="list" v-if="client.risk" >
+              <risk-indication :percentage="client.risk"/>
+
+              <Button :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
+
+            </div>
+
+            <div v-if="!client.risk" class="normal-content">
+              <h3 class="center">Er is geen risicoindicatie bekend over deze persoon.</h3>
+              <img src="/assets/images/undraw_blank_canvas.svg" alt="">
+            </div>
+          </div>
+
+          <div class="algemeen normal-content" v-if="index == 1">
             <ul class="list" v-if="client.info" >
               <li v-for="(value, key, i) in client.info" v-if="key != 'risk'" :key="i">
                 <h3>{{key}}</h3>
@@ -17,17 +31,6 @@
 
             <div v-if="!client.info">
               <h3 class="center">Er is geen algemene data bekend over deze persoon.</h3>
-              <img src="/assets/images/undraw_blank_canvas.svg" alt="">
-            </div>
-          </div>
-          <div class="risicoindicatie" v-if="index == 1">
-            <ul class="list" v-if="client.risk" >
-              <RiskIndication :percentage="client.risk"/>
-              <Button :textContent="'indicatie bijstellen'"/>
-            </ul>
-
-            <div v-if="!client.risk" class="normal-content">
-              <h3 class="center">Er is geen risicoindicatie bekend over deze persoon.</h3>
               <img src="/assets/images/undraw_blank_canvas.svg" alt="">
             </div>
           </div>
@@ -42,6 +45,8 @@
 import TabNavigation from '../organisms/TabNavigation'
 import RiskIndication from '../atoms/RiskIndication'
 import Button from '../atoms/Button.vue'
+import ClientService from '../../services/client-service.js'
+
 export default {
   name: 'SingleClient',
   components: {
@@ -52,16 +57,18 @@ export default {
   data(){
     return {
       client: {},
-      categories: ['Algemeen', 'Risico Indicatie'],
+      categories: ['Risico Indicatie', 'Algemeen'],
     }
   },
-  mounted() {
-    if (this.$route.query.client) {
-      this.client = this.$route.query.client
-    } else {
-      this.client = {name: this.$route.params.name}
+  async mounted() {
+    this.client = (await ClientService.get(this.$route.params.id)).data.client
+  },
+  methods: {
+    clientRiskIndication() {
+      this.$store.dispatch('setClient', this.client)
+      sessionStorage.setItem('client', JSON.stringify(this.client))
+      this.$router.push({name: 'riskanalysis'})
     }
-
   }
 }
 </script>
@@ -70,11 +77,28 @@ export default {
   @import '../../assets/tabpages';
   #single-client {
     padding-top: 3.125rem;
+    @media(min-width: 60rem) {
+      padding-top: 0;
+    }
     #tab-nav {
-      background: var(--color-main);
+      background: transparent;
+      margin-top: -4rem;
+      li {
+        button {
+          color: var(--color-ultra-light)
+        }
+        &.active-tab {
+          button {
+            color: var(--color-main)
+          }
+        }
+      }
+      #tab-bg {
+        width: 7.5rem;
+      }
     }
     .header {
-      min-height: 9rem;
+      min-height: 13rem;
       display: flex;
       align-items: flex-end;
       padding: 0 1.5rem;
@@ -94,14 +118,14 @@ export default {
         left: 0;
         position: absolute;
         display: block;
-        background-color: var(--color-gradient-start);
+        background-color: var(--color-ultra-light);
         background: var(--gradient-opaque);
         z-index: 0;
       }
       h2 {
         position: relative;
         z-index: 1;
-        margin-bottom: 0;
+        margin-bottom: 4rem;
         color: white;
         text-shadow: 0px 3px 5px rgba(0,0,0,0.2);
       }
@@ -117,6 +141,7 @@ export default {
 
     .tab-page {
       .risk-indication-holder {
+        padding-top: 2rem;
         justify-content: center;
       }
       img {
