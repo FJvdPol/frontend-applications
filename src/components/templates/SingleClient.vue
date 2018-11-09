@@ -1,7 +1,7 @@
 <template>
   <main id="single-client">
     <div class="header" :class="!client.img ? 'no-img' : ''" :style="client.img ? 'background-image: url('+client.img+');' : ''">
-      <h2>{{client.name}}</h2>
+      <h2>{{client.name}} {{client.lastname}}</h2>
     </div>
     <tab-navigation :tabs="categories" />
     <article class="tab-page-holder">
@@ -11,7 +11,7 @@
             <div class="list" v-if="client.risk" >
               <risk-indication :percentage="client.risk"/>
 
-              <Button :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
+              <Button class="center" :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
 
             </div>
 
@@ -30,7 +30,7 @@
             </ul>
 
             <div v-if="!client.info">
-              <h3 class="center">Er is geen algemene data bekend over deze persoon.</h3>
+              <h3>Er is geen algemene data bekend over deze persoon.</h3>
               <img src="/assets/images/undraw_blank_canvas.svg" alt="">
             </div>
           </div>
@@ -84,12 +84,18 @@ export default {
       background: transparent;
       margin-top: -4rem;
       li {
+
         button {
           color: var(--color-ultra-light)
         }
         &.active-tab {
           button {
             color: var(--color-main)
+          }
+        }
+        @media(min-width: 40rem){
+          &:first-of-type {
+            margin-left: 6rem;
           }
         }
       }
@@ -107,6 +113,10 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       position: relative;
+      @media(min-width: 40rem){
+        padding: 0 6rem;
+      }
+
       &.no-img {
         min-height: 5rem;
       }
@@ -143,10 +153,14 @@ export default {
       .risk-indication-holder {
         padding-top: 2rem;
         justify-content: center;
+        @media(min-width: 40rem){
+          justify-content: flex-start;
+        }
       }
       img {
         display: block;
         width: 70%;
+        max-width: 20rem;
         margin: 3rem auto 0;
       }
     }

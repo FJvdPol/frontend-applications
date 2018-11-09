@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
 
-    <div class="radio-group" v-if="inputObject.type == 'radio'">
+    <div class="radio-group" v-if="inputObject.choices.length < 3">
       <p>{{inputObject.question}}</p>
 
       <label v-for="(option, index) in inputObject.choices" :key="index">
@@ -11,7 +11,7 @@
 
     </div>
 
-    <div class="select-group" v-if="!inputObject.type">
+    <div class="select-group" v-if="inputObject.choices.length > 2">
       <label :for="inputObject.id">{{inputObject.question}}</label>
       <select class="input-group-input" @change="emitValue" :name="inputObject.id">
         <option value="" :selected="!inputObject.setval" disabled></option>

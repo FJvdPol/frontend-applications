@@ -7,6 +7,9 @@
       <router-link v-if="!$store.state.user" :to="{name: 'login'}">
         <Button :textContent="'log in'"/>
       </router-link>
+      <router-link v-if="$store.state.user" :to="{name: 'clients'}">
+        <Button :textContent="'Cliënten'"/>
+      </router-link>
     </div>
   </main>
 </template>
@@ -22,6 +25,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  main {
+    background-color: white;
+    min-height: 100vh;
+  }
   h3 {
     color: var(--color-light);
   }

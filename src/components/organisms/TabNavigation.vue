@@ -17,8 +17,12 @@ export default {
   props: ['tabs'],
   computed: {
     index() {
+      this.changeActiveTab(this.$store.state.formindex)
       return this.$store.state.formindex
     }
+  },
+  mounted() {
+    this.changeActiveTab(0)
   },
   watch: {
     tabs() {
@@ -71,6 +75,7 @@ export default {
 
     },
     changeNavBg(activeTab, allTabs, index) {
+
       let bg = document.querySelector('#tab-bg')
       let newElWidth, newElLeft
       // get offsets for animation
@@ -80,7 +85,6 @@ export default {
         newElWidth = activeTab.offsetWidth / 16 + 2 + 'rem'
       }
       newElLeft = activeTab.offsetLeft - 40 + 'px'
-
       TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
     }
   }
@@ -145,6 +149,9 @@ export default {
       bottom: 0;
       left: 1.5rem;
       border-radius: 25px 25px 0 0;
+      @media(min-width: 60rem){
+        background: var(--color-grey-ultra-light);
+      }
     }
   }
 </style>

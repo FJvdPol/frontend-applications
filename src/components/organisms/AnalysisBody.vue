@@ -60,7 +60,6 @@ export default {
 <style lang="scss" scoped>
   @import '../../assets/tabpages';
   h2 {
-    padding: 0 1.5rem;
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
   }
@@ -75,13 +74,16 @@ export default {
     }
   }
   .input-group {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+
+    margin-bottom: 1rem;
   }
   .container {
     padding-top: 2rem;
     &.container-form {
-      padding: 0;
+      margin: 0;
+      @media(min-width: 40rem){
+        margin: 0 3rem;
+      }
       padding-top: 3rem;
       padding-bottom: 7rem;
     }

@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss">
   .button {
+    cursor: pointer;
     display: block;
     background: 0;
     background: var(--gradient-bg);
@@ -24,16 +25,15 @@ export default {
     padding: 1rem 2.5rem;
     color: white;
     // color: var(--color-light);
-
+    @media(min-width: 40rem) {
+      margin-left: 0;
+    }
     font-weight: 500;
     margin: 3rem auto;
     box-shadow: 0px 12px 40px -5px var(--boxshadow-standard);
     &:focus, &:active {
       outline: none;
       background: var(--color-light);
-    }
-    &.left {
-      margin-left: 0;
     }
     &.secondary {
       background: transparent;
@@ -43,6 +43,11 @@ export default {
       border-bottom: 2px solid var(--color-light);
       color: var(--color-light);
       // box-shadow: none;
+    }
+    &.center {
+      @media(min-width: 40rem) {
+        margin-left: auto;
+      }
     }
   }
 </style>

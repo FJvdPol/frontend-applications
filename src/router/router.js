@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../components/pages/Home.vue'
 import Login from '../components/pages/Login.vue'
 import Register from '../components/pages/Register.vue'
+import PageInfo from '../components/pages/PageInfo.vue'
 import PageClients from '../components/pages/PageClients.vue'
 import SingleClient from '../components/templates/SingleClient.vue'
 import PageRiskAnalysis from '../components/pages/PageRiskAnalysis.vue'
@@ -26,6 +27,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/info',
+    name: 'info',
+    component: PageInfo
+  },
+  {
     path: '/login',
     name: 'login',
     component: Login
@@ -42,18 +48,17 @@ const routes = [
     beforeEnter: checkLogin
   },
   {
+    path: '/clienten/risico-analyse',
+    name: 'riskanalysis',
+    component: PageRiskAnalysis,
+    beforeEnter: checkLogin
+  },
+  {
     path: '/clienten/:id',
     name: 'singleclient',
     component: SingleClient,
     beforeEnter: checkLogin
   },
-  {
-    path: '/risico-analyse',
-    name: 'riskanalysis',
-    component: PageRiskAnalysis,
-    beforeEnter: checkLogin
-  },
-
   {
     path: '/page-not-found',
     name: 'page-not-found',

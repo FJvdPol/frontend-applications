@@ -16,7 +16,7 @@
 
           </div>
         </div>
-        <p>{{error.message}}</p>
+        <p v-if="error.else" class="error">{{error.message}}</p>
         <input @click="login" class="button" type="submit" name="" value="log in">
       </form>
       <router-link :to="{name: 'register'}">
@@ -70,9 +70,13 @@ export default {
               status: e.response.status,
               message: e.response.data.error,
             }
-            this.error.status == 404 ? this.error.email = true : false
-            this.error.status == 401 ? this.error.pass = true : false
-            console.log(this.error)
+            if (this.error.status == 404){
+              this.error.email = true
+            } else if (this.error.status == 401){
+              this.error.pass = true
+            } else {
+              this.error.else = true
+            }
           } else {
             this.error = {
               else: true,
@@ -89,16 +93,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  main {
+    background: white;
+    min-height: 100vh;
+  }
   .input-group {
     padding-top: 0;
     padding-bottom: 2rem;
   }
   input[type="submit"] {
-    margin-top: 0;
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
     width: auto;
   }
   .button {
-    margin-top: 0;
+    margin-top: 2rem;
+  }
+  .container {
+    padding-bottom: 6rem;
   }
 </style>

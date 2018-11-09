@@ -47,6 +47,9 @@ export default {
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    // @media(min-width:60rem){
+      background-color: var(--color-grey-ultra-light);
+    // }
   }
   button {
     background: 0;
@@ -59,6 +62,9 @@ export default {
     font-weight: 700;
     margin-top: 0;
   }
+  h3 {
+    font-weight: 500;
+  }
   a {
     text-decoration: none;
     outline: none;
@@ -67,6 +73,9 @@ export default {
   p {
     color: var(--color-grey);
     line-height: 1.5;
+    &.error {
+      color: var(--color-error);
+    }
   }
   .center {
     text-align: center;

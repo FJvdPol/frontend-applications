@@ -50,6 +50,7 @@ export default {
     height: 2.5rem;
     outline: none;
     padding-right: 1.5rem;
+    cursor: pointer;
     i {
       color: white;
       font-size: 1.25rem;

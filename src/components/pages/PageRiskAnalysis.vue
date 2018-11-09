@@ -23,11 +23,21 @@ export default {
   #risk-analysis {
     .form-holder {
       padding-top: 3.125rem;
+      @media(min-width: 60rem){
+        padding-top: 0;
+      }
     }
     .risk-indication-bar {
       position: fixed;
       bottom: 0;
       left: 0;
+      @media(min-width: 60rem){
+        box-shadow: none;
+        left: 10rem;
+        padding: 1rem 6rem 2rem;
+
+      }
+
       width: 100%;
       background-color: white;
       padding: 0.5rem 1.5rem;

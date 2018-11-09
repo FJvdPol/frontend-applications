@@ -1,9 +1,11 @@
 <template>
   <div class="form-holder">
     <div :class="openNav ? 'navigation-holder grow-nav' : 'navigation-holder'">
-      <h2>{{this.client.name}} {{this.client.lastname}}</h2>
+      <router-link :to="{ path: '/clienten/' + client.id }">
+        <h2>{{client.name}} {{client.lastname}}</h2>
+      </router-link>
       <search-bar :action="growNav" @valueChange="applySearchQuery"/>
-      <tab-navigation :tabs="getCategories()"/>
+      <tab-navigation :tabs="categories"/>
     </div>
     <analysis-body @valueChange="updateSelected" @saveForm="updateClient" :questionsByCategory="questionsByCategory" :categories="getCategories()"/>
     <div class="risk-indication-bar">
@@ -32,7 +34,8 @@ export default {
       openNav: false,
       searchQuery: '',
       categories: [],
-      questionsByCategory: []
+      questionsByCategory: [],
+      error: {}
     }
   },
   components: {
@@ -44,7 +47,9 @@ export default {
   mounted() {
     if (sessionStorage.getItem('client')) {
       this.client = JSON.parse(sessionStorage.getItem('client'))
-      this.client.formdata = JSON.parse(this.client.formdata)
+      if (typeof this.client.formdata == "string"){
+        this.client.formdata = JSON.parse(this.client.formdata)
+      }
       this.questionsByCategory = this.getQuestionsByCategory()
       this.categories = this.getCategories()
     }
@@ -54,9 +59,9 @@ export default {
       this.openNav = !this.openNav
     },
     applySearchQuery(value) {
-      console.log('firing searchQuery');
       this.searchQuery = value.toLowerCase()
       this.questionsByCategory = this.getQuestionsByCategory()
+      this.categories = this.getCategories()
     },
     getCategories() {
       return (
@@ -97,11 +102,9 @@ export default {
         this.client.formdata = {id: [], value: []}
       }
       this.percentage = this.calcRiskIndication()
-      console.log('in getQuestions: ', this.client.formdata.id);
       return questionsByCategory
     },
     calcRiskIndication() {
-      console.log('firing this');
       if (this.client.formdata){
         if (this.client.formdata.value.length == 0) {
           return 0
@@ -113,7 +116,6 @@ export default {
     updateSelected(selected) {
       let alreadyIn = false
       let saved = this.client.formdata
-      console.log('id array: ', saved.id, this.client.formdata)
       saved.id.forEach((id, index) => {
         if (selected.id == id) {
           saved.value[index] = selected.value
@@ -122,8 +124,8 @@ export default {
       })
 
       if (!alreadyIn) {
-        saved.id.push(event.id)
-        saved.value.push(event.value)
+        saved.id.push(selected.id)
+        saved.value.push(selected.value)
       }
       this.client.formdata = saved
       this.percentage = this.calcRiskIndication()
@@ -138,15 +140,23 @@ export default {
         return
       }
       try {
-        console.log('updating client');
         let client = this.client
         client.risk = this.percentage
-        client.formdata = this.client.formdata
-        JSON.stringify(client.formdata)
-        const updatedClient = await ClientService.update(this.client.id, {client: client})
+        client.formdata = JSON.stringify(this.client.formdata)
+        await ClientService.update(this.client.id, {client: client})
         this.$router.push({path: '/clienten/' + this.client.id})
       } catch(e) {
-        console.log(e)
+        if (e.response){
+          this.error = {
+            status: e.response.status,
+            message: e.response.data.error,
+          }
+        } else {
+          this.error = {
+            else: true,
+            message: 'Er kon geen verbinding met internet gemaakt worden'
+          }
+        }
       }
 
     }
@@ -167,12 +177,26 @@ export default {
       font-size: 1rem;
       transition: all 0.3s;
     }
+    @media(min-width: 60rem){
+      form {
+        max-width: 20rem;
+        left: auto;
+        right: 0;
+      }
+    }
+
     &.grow-nav {
       #tab-nav {
         height: 9rem;
+        @media(min-width: 60rem){
+          height: 8rem;
+        }
       }
       h2 {
         opacity: 0;
+        @media(min-width: 60rem){
+          opacity: 1;
+        }
       }
     }
     #tab-nav {

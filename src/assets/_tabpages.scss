@@ -4,12 +4,28 @@
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 100vw;
+    min-width: 100%;
     opacity: 0;
     z-index: -1;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
     pointer-events: none;
+    padding-bottom: 7.5rem;
+    @media(min-width: 60rem){
+      padding-bottom: 10rem;
+      background-color: var(--color-grey-ultra-light);
+    }
+    .container {
+      background-color: white;
+      padding-bottom: 3rem;
+      @media(min-width: 60rem){
+        border-radius: 25px;
+        // padding-right: 15rem;
+        margin-top: 3rem;
+        width: auto;
+        display: table;
+      }
+    }
     &.active-page {
       pointer-events: all;
       overflow: auto;

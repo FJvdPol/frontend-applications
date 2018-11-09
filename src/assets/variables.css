@@ -10,7 +10,7 @@
   --color-grey-light: #EEE;
   --color-grey-ultra-light: #F7F7F7;
 
-  --boxshadow-standard: rgba(108, 99, 255, 0.25);
+  --boxshadow-standard: rgba(108, 99, 255, 0.15);
   --boxshadow-dark: rgba(70, 58, 255, 0.15);
 
   --color-gradient-start: var(--color-accent);/* #00E676; */

@@ -12,13 +12,12 @@
           <router-link tag="li" to="/clienten">
             <a>Cliënten</a>
           </router-link>
-          <!-- <router-link tag="li" to="/risico-analyse">
-            <a>Risico Analyse</a>
-          </router-link> -->
         </ul>
         <ul class="bottom">
-          <li> <i class="fa fa-info-circle"></i> </li>
-          <li @click="logOut" v-if="$store.state.user">Ingelogd als: {{$store.state.user.name}}</li>
+          <router-link :to="{ name: 'info' }">
+            <li><i class="fa fa-info-circle"></i> </li>
+          </router-link>
+          <li @click="logOut" v-if="$store.state.user">Ingelogd als: <span>{{$store.state.user.name}}</span></li>
           <router-link v-else :to="{ name: 'login' }">
             <li>log in</li>
           </router-link>
@@ -92,6 +91,13 @@ export default {
       nav {
         transform: translateX(-70vw);
         box-shadow: -10px 20px 30px 0px var(--boxshadow-dark);
+        @media(min-width: 40rem){
+
+          transform: translateX(-10rem);
+        }
+        @media(min-width: 60rem){
+          transform: translateX(0);
+        }
       }
       #menu-button {
         &::after {
@@ -102,6 +108,15 @@ export default {
           transform: rotate(-45deg);
           top: 50%;
         }
+      }
+    }
+    @media(min-width: 60rem){
+      width: 10rem;
+      box-shadow: none;
+      background-color: var(--color-ultra-light);
+      #menu-button, #back-button {
+        display: none;
+        pointer-events: none;
       }
     }
   }
@@ -178,6 +193,9 @@ export default {
     display: flex;
     align-items: stretch;
     line-height: 1;
+    @media(min-width: 60rem){
+      color: var(--color-main)
+    }
     a {
       display: flex;
       align-items: center;
@@ -200,10 +218,20 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media(min-width: 40rem){
+      width: 10rem;
+    }
+    @media(min-width: 60rem) {
+      left: 0;
+      transform: translateX(0);
+      right: auto;
+      box-shadow: none;
+      background: var(--color-ultra-light);
+    }
     ul {
       display: flex;
       flex-direction: column;
-      padding: 0;
+      padding: 0 1rem;
       margin: 0;
       &.top {
         padding-top: 6rem;
@@ -212,13 +240,37 @@ export default {
         padding-bottom: 2rem;
         li {
           margin-bottom: 1rem;
+          color: white;
+          &:last-of-type {
+            line-height: 2;
+            span {
+              color: white;
+              font-weight: 500;
+              cursor: pointer;
+            }
+          }
+          @media(min-width: 60rem){
+            color: var(--color-main);
+            &:last-of-type {
+              margin-bottom: 0;
+              span {
+                color: var(--color-main);
+              }
+              &:hover {
+                span {
+                  color: var(--color-dark);
+                }
+              }
+            }
+          }
           i {
+            cursor: pointer;
             font-size: 1.5rem;
           }
         }
       }
-
       li {
+        line-height: 1.5;
         text-align: center;
         margin-bottom: 2rem;
         font-size: 1rem;
@@ -232,45 +284,16 @@ export default {
           font-weight: inherit;
           text-decoration: none;
         }
-      }
-    }
-  }
-  @media screen and (min-width: 40rem){
-    header {
-      nav {
-        width: 10rem;
-      }
-      &.menu-visible {
-        nav {
-          transform: translateX(-10rem);
+        @media(min-width: 60rem){
+          color: var(--color-main);
+          &.router-link-exact-active {
+            color: var(--color-dark);
+          }
+          &:hover {
+            color: var(--color-light);
+          }
         }
-
       }
     }
-
-
-  }
-  @media screen and (min-width: 60rem){
-    header {
-      width: 10rem;
-      box-shadow: none;
-      nav {
-        left: 0;
-        transform: translateX(0);
-        right: auto;
-        box-shadow: none;
-        background: var(--color-dark)
-      }
-      #menu-button, #back-button {
-        display: none;
-      }
-      &.menu-visible {
-        nav {
-          transform: translateX(0);
-        }
-
-      }
-    }
-
   }
 </style>

@@ -31,6 +31,7 @@ export default {
     margin-bottom: 2rem;
     border-radius: 5px;
     box-shadow: 0px 10px 40px -5px var(--boxshadow-standard);
+    background: white;
     a {
       text-decoration: none;
     }
