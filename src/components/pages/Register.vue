@@ -54,42 +54,32 @@ export default {
   },
   methods: {
     async registerUser() {
-      if (this.user.name && this.user.email && this.user.pass){
-        try {
-          const response = await Authenticator.register({
-            user: {
-              name: this.user.name,
-              email: this.user.email,
-              pass: this.user.pass
-            }
-          })
-          this.response = response
-          response.status == 200 ? this.$router.push({name: 'home'}) : ''
-          this.$store.dispatch('setUser', response.data.user)
-        } catch (e) {
-          if (e.response){
-            this.error = {
-              status: e.response.status,
-              message: e.response.data.error,
-            }
-            if (this.error.status == 400){
-              this.error.email = true
-            } else {
-              this.error.else = true
-            }
-          } else {
-            this.error = {
-              else: true,
-              email: false,
-              message: 'Er kon geen verbinding met internet gemaakt worden'
-            }
-          }
-        }
-
-      } else {
+      if (!this.user.name || !this.user.email || !this.user.pass){
         !this.user.name ? this.error.name = true : this.error.name = false
         !this.user.email ? this.error.email = true : this.error.email = false
         !this.user.pass ? this.error.pass = true : this.error.pass = false
+      }
+      else {
+        try {
+          const response = await Authenticator.register({
+            name: this.user.name,
+            email: this.user.email,
+            pass: this.user.pass
+          })
+          this.response = response
+          this.$store.dispatch('setUser', response.data.user)
+          this.$router.push({name: 'home'})
+        } catch (e) {
+          this.error = {
+            status: e.status,
+            message: e.error,
+          }
+          if (this.error.status == 400){
+            this.error.email = true
+          } else {
+            this.error.else = true
+          }
+        }
       }
     }
   }

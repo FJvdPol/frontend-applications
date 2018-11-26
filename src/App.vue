@@ -22,8 +22,9 @@ export default {
 <style lang="scss">
   @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
   @import '~sanitize.css';
-  @import './assets/variables.css';
+  @import './assets/variables';
   @import './assets/forms';
+  @import './assets/animations';
 
   body {
     overflow-x: hidden;

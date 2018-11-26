@@ -1,0 +1,8 @@
+@keyframes load {
+  0% {
+    transform: translateX(-10rem)
+  }
+  100% {
+    transform: translateX(calc(100% + 20rem))
+  }
+}

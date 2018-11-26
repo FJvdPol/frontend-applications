@@ -2,9 +2,13 @@
   <main>
     <div class="container">
       <h2>Cliënten</h2>
-      <p v-if="clients == null && !error">Cliëntenlijst aan het laden....</p>
+      <div class="loader" v-if="clients == null && !error">
+        <loader-card />
+        <loader-card />
+      </div>
+
       <p v-if="error">Iets ging fout: {{error.status}} {{error.message}}</p>
-      <clients-list :clients="clients"/>
+      <clients-list v-else :clients="clients"/>
       <!-- <AddClientBar /> -->
     </div>
 
@@ -14,6 +18,7 @@
 
 <script>
 import ClientsList from '../organisms/ClientsList.vue'
+import LoaderCard from '../loaders/LoaderCard.vue'
 import AddClientBar from '../atoms/AddClientBar.vue'
 import ClientService from '../../services/client-service.js'
 
@@ -26,22 +31,38 @@ export default {
     }
   },
   async mounted() {
-    try {
-      this.clients = (await ClientService.getAll()).data.clients
-    } catch (e) {
-      if (e.response){
-        this.error = {}
-        this.error.status = e.response.status
-        this.error.message = e.response.data.error
-      } else {
-        console.log(e);
+    setTimeout(() => {
+      const response = ClientService.getAll()
+      if (response.status === 200) {
+        return this.clients = response.data.clients
       }
+      const fakeClients = [
+        {
+          name: 'johan',
+          lastname: 'de vries',
+          id: 0,
+          img: 'https://unsplash.it/500/500',
+          formdata: null,
+          risk: 0
+        },
+        {
+          name: 'sara',
+          lastname: 'de jong',
+          id: 1,
+          img: 'https://unsplash.it/600/600',
+          formdata: null,
+          risk: 0
+        }
+      ]
+      fakeClients.forEach(client => ClientService.create(client))
+      this.clients = ClientService.getAll().data.clients
+    }, 3000)
 
-    }
   },
   components: {
     ClientsList,
-    AddClientBar
+    AddClientBar,
+    LoaderCard
   }
 }
 </script>
@@ -49,5 +70,14 @@ export default {
 <style lang="scss" scoped>
   .container {
     padding-bottom: 7rem;
+  }
+  .loader {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    .client {
+      margin-right: 1rem;
+    }
   }
 </style>

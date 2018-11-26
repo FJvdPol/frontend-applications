@@ -6,17 +6,24 @@
       <button id="menu-button" v-on:click="toggleMenu">{{menuVisible ? 'Sluit' : 'Menu'}}</button>
       <nav>
         <ul class="top" @click="toggleMenu">
-          <router-link tag="li" to="/">
-            <a>Home</a>
-          </router-link>
-          <router-link tag="li" to="/clienten">
-            <a>Cliënten</a>
-          </router-link>
+          <li>
+            <router-link to="/">
+              Home
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/clienten">
+              Cliënten
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'info' }">
+              About
+            </router-link>
+          </li>
         </ul>
         <ul class="bottom">
-          <router-link :to="{ name: 'info' }">
-            <li><i class="fa fa-info-circle"></i> </li>
-          </router-link>
+
           <li @click="logOut" v-if="$store.state.user">Ingelogd als: <span>{{$store.state.user.name}}</span></li>
           <router-link v-else :to="{ name: 'login' }">
             <li>log in</li>
@@ -48,7 +55,7 @@ export default {
       }
     },
     logOut() {
-      sessionStorage.clear()
+      sessionStorage.removeItem('user')
       this.$store.dispatch('logOut')
       this.menuVisible = false;
       this.$router.push({name: 'home'})
@@ -276,21 +283,23 @@ export default {
         font-size: 1rem;
         font-weight: normal;
         transition: all 0.3s ease-in-out;
-        &.router-link-exact-active {
-          font-weight: bold;
-        }
         a {
           color: inherit;
           font-weight: inherit;
           text-decoration: none;
+          &.router-link-exact-active {
+            font-weight: bold;
+          }
         }
         @media(min-width: 60rem){
-          color: var(--color-main);
-          &.router-link-exact-active {
-            color: var(--color-dark);
-          }
-          &:hover {
-            color: var(--color-light);
+          a {
+            color: var(--color-main);
+            &.router-link-exact-active {
+              color: var(--color-dark);
+            }
+            &:hover {
+              color: var(--color-light);
+            }
           }
         }
       }

@@ -8,14 +8,12 @@
       <section v-for="(category, index) in categories" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
         <div class="container">
           <div class="risicoindicatie" v-if="index == 0">
-            <div class="list" v-if="client.risk" >
+            <div class="list" v-if="!isNaN(client.risk)" >
               <risk-indication :percentage="client.risk"/>
-
               <Button class="center" :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
-
             </div>
 
-            <div v-if="!client.risk" class="normal-content">
+            <div v-if="isNaN(client.risk)" class="normal-content">
               <h3 class="center">Er is geen risicoindicatie bekend over deze persoon.</h3>
               <img src="/assets/images/undraw_blank_canvas.svg" alt="">
             </div>
@@ -58,10 +56,20 @@ export default {
     return {
       client: {},
       categories: ['Risico Indicatie', 'Algemeen'],
+      error: {}
     }
   },
   async mounted() {
-    this.client = (await ClientService.get(this.$route.params.id)).data.client
+    const response = ClientService.get(this.$route.params.id)
+    if (response.status === 200){
+      this.client = response.data.client
+    } else {
+      this.error = {
+        status: response.status,
+        message: response.error,
+      }
+      console.log(this.error)
+    }
   },
   methods: {
     clientRiskIndication() {
@@ -77,8 +85,13 @@ export default {
   @import '../../assets/tabpages';
   #single-client {
     padding-top: 3.125rem;
+    min-height: 100vh;
+    background-color: white;
+    overflow: hidden;
     @media(min-width: 60rem) {
       padding-top: 0;
+      background-color: transparent;
+      overflow: auto;
     }
     #tab-nav {
       background: transparent;
@@ -116,9 +129,8 @@ export default {
       @media(min-width: 40rem){
         padding: 0 6rem;
       }
-
       &.no-img {
-        min-height: 5rem;
+        min-height: 9rem;
       }
       &::after {
         content: "";
@@ -144,9 +156,7 @@ export default {
       padding-top: 2rem;
     }
     h2 {
-      span {
-        text-transform: capitalize;
-      }
+      text-transform: capitalize;
     }
 
     .tab-page {

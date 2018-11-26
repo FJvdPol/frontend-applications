@@ -5,15 +5,14 @@
       <form class="" @submit.prevent>
         <div :class="error.email ? 'input-group error' : 'input-group'">
           <label for="email">Email:</label>
-          <p v-if="error.status == 404 && error.email">{{error.message}}</p>
           <input v-model="user.email" @focus="error.email = false" type="text" name="" id="email" value="">
+          <p v-if="error.status == 404 && error.email">{{error.message}}</p>
         </div>
         <div :class="error.pass ? 'input-group error' : 'input-group'">
           <div class="pass-group">
             <label for="pass">Wachtwoord:</label>
-            <p v-if="error.status == 401 && error.pass">{{error.message}}</p>
             <input v-model="user.pass" @focus="error.pass = false" type="password" name="" id="pass" value="">
-
+            <p v-if="error.status == 401 && error.pass">{{error.message}}</p>
           </div>
         </div>
         <p v-if="error.else" class="error">{{error.message}}</p>
@@ -55,37 +54,25 @@ export default {
       if (this.user.email && this.user.pass){
         try {
           const response = await Authenticator.login({
-            user: {
               email: this.user.email,
               pass: this.user.pass
-            }
-          })
+            })
           this.response = response
           this.$store.dispatch('setUser', response.data.user)
-          sessionStorage.setItem('user', JSON.stringify(response.data.user))
           this.$router.push('/clienten')
         } catch (e) {
-          if (e.response){
-            this.error = {
-              status: e.response.status,
-              message: e.response.data.error,
-            }
-            if (this.error.status == 404){
-              this.error.email = true
-            } else if (this.error.status == 401){
-              this.error.pass = true
-            } else {
-              this.error.else = true
-            }
-          } else {
-            this.error = {
-              else: true,
-              message: 'Er kon geen verbinding met internet gemaakt worden'
-            }
+          this.error = {
+            status: e.status,
+            message: e.error,
           }
-
+          if (this.error.status == 404){
+            this.error.email = true
+          } else if (this.error.status == 401){
+            this.error.pass = true
+          } else {
+            this.error.else = true
+          }
         }
-
       }
     }
   }

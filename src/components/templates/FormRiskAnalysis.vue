@@ -122,43 +122,30 @@ export default {
           alreadyIn = true
         }
       })
-
       if (!alreadyIn) {
         saved.id.push(selected.id)
         saved.value.push(selected.value)
       }
       this.client.formdata = saved
       this.percentage = this.calcRiskIndication()
-      let client = this.client
-      client.risk = this.percentage
-      client.formdata = this.client.formdata
-      JSON.stringify(client.formdata)
+      let client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
       sessionStorage.setItem('client', JSON.stringify(client))
     },
-    async updateClient(){
+    updateClient(){
       if (!this.client) {
         return
       }
-      try {
-        let client = this.client
-        client.risk = this.percentage
-        client.formdata = JSON.stringify(this.client.formdata)
-        await ClientService.update(this.client.id, {client: client})
-        this.$router.push({path: '/clienten/' + this.client.id})
-      } catch(e) {
-        if (e.response){
-          this.error = {
-            status: e.response.status,
-            message: e.response.data.error,
-          }
-        } else {
-          this.error = {
-            else: true,
-            message: 'Er kon geen verbinding met internet gemaakt worden'
-          }
+      let client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
+      const response = ClientService.update(client.id, client)
+      if (response.status === 200){
+        this.$router.push({path: '/clienten/' + client.id})
+      } else {
+        this.error = {
+          status: response.status,
+          message: response.error,
         }
+        console.log(this.error)
       }
-
     }
   }
 }
@@ -176,6 +163,7 @@ export default {
       font-weight: 500;
       font-size: 1rem;
       transition: all 0.3s;
+      text-transform: capitalize;
     }
     @media(min-width: 60rem){
       form {

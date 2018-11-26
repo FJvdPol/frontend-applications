@@ -1,56 +1,43 @@
 <template >
   <article class="client">
-    <router-link :to="{ path: String(client.id) }" append>
-      <figure v-if="client.img">
-        <img :src="client.img" alt="">
-      </figure>
-      <figure v-else class="no-img">
-        <img src="/assets/images/undraw_children.svg" alt="">
-        <figcaption>Geen foto</figcaption>
-      </figure>
-      <div class="nav">
-        <h3>{{client.name}} {{client.lastname}}</h3>
-        <i class="fa fa-caret-right"></i>
-      </div>
-    </router-link>
+    <figure class="no-img">
+      <figcaption>Loading client...</figcaption>
+    </figure>
+    <div class="nav">
+      <h3></h3>
+      <i></i>
+    </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'CardClient',
-  props: ['client']
+  name: 'LoaderCart'
 }
 </script>
 
 <style lang="scss" scoped>
   .client {
-    // width: calc(50% - 0.5rem);
     width: 100%;
     max-width: 20rem;
     margin-bottom: 2rem;
     border-radius: 5px;
     box-shadow: 0px 10px 40px -5px var(--boxshadow-standard);
     background: white;
-    a {
-      text-decoration: none;
-    }
     h3 {
-      text-transform: capitalize;
       margin: 0;
       font-size: 1rem;
+      height: 1rem;
       font-weight: 500;
+      content: "";
+    }
+    i {
+      font-size: 1.5rem;
       color: var(--color-main);
     }
     .nav {
       padding: 1rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      i {
-        font-size: 1.5rem;
-        color: var(--color-main);
-      }
     }
     figure {
       position: relative;
@@ -60,12 +47,8 @@ export default {
       border-radius: 5px 5px 0 0;
       background-color: var(--color-light);
       &.no-img {
-        position: relative;
         &::after {
           opacity: 0.9;
-        }
-        img {
-          opacity: 0.5;
         }
         figcaption {
           position: absolute;
@@ -80,23 +63,18 @@ export default {
       }
       &::after {
         content: "";
-        width: 100%;
+        width: 5rem;
         top: 0;
         bottom: 0;
         left: 0;
         position: absolute;
         display: block;
-        background-color: var(--color-gradient-start);
-        background: var(--gradient-opaque);
+        background-color: var(--boxshadow-standard);
+        // background: var(--gradient-opaque);
         z-index: 0;
-        opacity: 0.5;
+        opacity: 0.1;
+        animation: load 1s infinite linear;
       }
-    }
-    img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      opacity: 0.9;
     }
   }
 </style>
