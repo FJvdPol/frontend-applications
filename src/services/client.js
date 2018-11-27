@@ -19,6 +19,7 @@ export default {
       }
     }
   },
+
   getAll() {
     const encClients = JSON.parse(sessionStorage.getItem('clients'))
     if (!encClients) {
@@ -35,6 +36,7 @@ export default {
       }
     }
   },
+
   get(id) {
     const clients = JSON.parse(sessionStorage.getItem('clients'))
     if (!clients || !clients[id]) {
@@ -51,6 +53,7 @@ export default {
       }
     }
   },
+
   update(id, client) {
     const clients = JSON.parse(sessionStorage.getItem('clients'))
     if (!clients || !clients[id]) {

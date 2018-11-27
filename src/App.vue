@@ -5,7 +5,6 @@
     <div class="page-holder">
       <router-view/>
     </div>
-
   </div>
 </template>
 

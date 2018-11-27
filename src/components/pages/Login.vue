@@ -50,20 +50,22 @@ export default {
     Button
   },
   methods: {
-    async login() {
+    login() {
       if (this.user.email && this.user.pass){
-        try {
-          const response = await Authenticator.login({
-              email: this.user.email,
-              pass: this.user.pass
-            })
-          this.response = response
+
+        const response = Authenticator.login({
+            email: this.user.email,
+            pass: this.user.pass
+          })
+
+        this.response = response
+        if (response.status === 200) {
           this.$store.dispatch('setUser', response.data.user)
           this.$router.push('/clienten')
-        } catch (e) {
+        } else {
           this.error = {
-            status: e.status,
-            message: e.error,
+            status: response.status,
+            message: response.error,
           }
           if (this.error.status == 404){
             this.error.email = true

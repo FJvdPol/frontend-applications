@@ -43,7 +43,7 @@
 import TabNavigation from '../organisms/TabNavigation'
 import RiskIndication from '../atoms/RiskIndication'
 import Button from '../atoms/Button.vue'
-import ClientService from '../../services/client-service.js'
+import ClientService from '../../services/client.js'
 
 export default {
   name: 'SingleClient',

@@ -37,24 +37,22 @@ input[type="radio"], input[type="checkbox"] {
   height: 2rem;
   background-color: var(--color-grey-light);
   border: 1px solid var(--color-light);
-  border-radius: 5px;
+  border-radius: 50%;
   position: relative;
+  transition: all 0.3s ease-in-out;
   &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
     content: "";
-    width: 2rem;
-    height: 2rem;
-    // background-color: var(--color-light);
+    display: block;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 0;
+    height: 0;
     opacity: 0;
+    background-color: white;
     transition: all 0.3s ease-in-out;
-    border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-    font-family: FontAwesome;
-    color: var(--color-main);
+    transform-origin: center;
+    border-radius: 50%;
   }
   &:focus, &:active, &:hover {
     border-color: var(--color-main);
@@ -67,15 +65,11 @@ input[type="radio"], input[type="checkbox"] {
   &:checked {
     background-color: var(--color-main);
     border-color: transparent;
-    &:hover, &:active, &:focus {
-      &::before {
-        color: var(--color-light);
-      }
-    }
     &::before {
-      color: white;
+      transform: translate(-0.285rem, -0.285rem);
+      width: 0.5rem;
+      height: 0.5rem;
       opacity: 1;
-      content:"\f00c";
     }
   }
 }
@@ -116,7 +110,7 @@ input[type="radio"], input[type="checkbox"] {
     height: 2rem;
     left: auto;
     right: 0rem;
-    bottom: 0.6rem;
+    top: 3rem;
   }
   select, input {
     padding-right: 4rem;

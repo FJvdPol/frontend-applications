@@ -19,6 +19,9 @@ export default {
   },
   methods: {
     toggleNav() {
+      if (this.value) {
+        return
+      }
       if (this.open) {
         document.querySelector('#search-input').blur()
       } else {

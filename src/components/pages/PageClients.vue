@@ -20,7 +20,7 @@
 import ClientsList from '../organisms/ClientsList.vue'
 import LoaderCard from '../loaders/LoaderCard.vue'
 import AddClientBar from '../atoms/AddClientBar.vue'
-import ClientService from '../../services/client-service.js'
+import ClientService from '../../services/client.js'
 
 export default {
   name: 'PageClients',

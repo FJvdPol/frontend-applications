@@ -7,7 +7,7 @@
       <search-bar :action="growNav" @valueChange="applySearchQuery"/>
       <tab-navigation :tabs="categories"/>
     </div>
-    <analysis-body @valueChange="updateSelected" @saveForm="updateClient" :questionsByCategory="questionsByCategory" :categories="getCategories()"/>
+    <analysis-body @valueChange="updateSelected" @saveForm="updateClient" :questionsByCategory="questionsByCategory" :categories="categories"/>
     <div class="risk-indication-bar">
       <risk-indication :percentage="percentage" />
     </div>
@@ -15,18 +15,18 @@
 </template>
 
 <script>
-import json from '../../assets/data.json'
 import TabNavigation from '../organisms/TabNavigation.vue'
 import AnalysisBody from '../organisms/AnalysisBody.vue'
 import RiskIndication from '../atoms/RiskIndication.vue'
 import SearchBar from '../atoms/SearchBar'
-import ClientService from '../../services/client-service.js'
+import Client from '../../services/client.js'
+import Questions from '../../services/questions.js'
+
 
 export default {
   name: 'PageRiskAnalysis',
   data() {
     return {
-      file: json,
       selected: [],
       percentage: 0,
       client: {},
@@ -51,7 +51,7 @@ export default {
         this.client.formdata = JSON.parse(this.client.formdata)
       }
       this.questionsByCategory = this.getQuestionsByCategory()
-      this.categories = this.getCategories()
+      this.categories = Questions.categories()
     }
   },
   methods: {
@@ -60,40 +60,15 @@ export default {
     },
     applySearchQuery(value) {
       this.searchQuery = value.toLowerCase()
-      this.questionsByCategory = this.getQuestionsByCategory()
-      this.categories = this.getCategories()
-    },
-    getCategories() {
-      return (
-        this.file
-          .filter(obj => this.searchQuery ? obj.question.toLowerCase().indexOf(this.searchQuery) > -1 : true)
-          .map(questionObject => {
-            return questionObject['category']
-          })
-          .filter((category, firstTime, categories) => {
-            // return alleen unieke categorieën, geen dubbele
-            if (categories.indexOf(category) == firstTime) {
-              return category
-            }
-          })
-      )
+      this.questionsByCategory = this.getQuestionsByCategory(this.searchQuery)
+      this.categories = Questions.categories(this.searchQuery)
     },
     getQuestionsByCategory() {
-      // get list of all categories
-      let categories = this.getCategories()
-      let questionsByCategory = []
-      // for every category, get all the questionObjects that have it's name as value of category key
-      categories.forEach(category => {
-        questionsByCategory.push(
-          this.file
-            .filter(obj => this.searchQuery ? obj.question.toLowerCase().indexOf(this.searchQuery) > -1 : true) // remove objects that don't contain searchquery in question key
-            .filter((object) => object.category === category)
-        )
-      })
+      const questions = Questions.byCategory(this.searchQuery)
       if (this.client.formdata) { // if client has formdata in the database
-        // this.percentage = client.risk
+        this.percentage = this.client.risk
         let data = this.client.formdata // get formdata
-        questionsByCategory.forEach(category => { // send which parts of the form have already been set
+        questions.forEach(category => { // send which parts of the form have already been set
           category.forEach(questionObj => {
             data.id.forEach((id, index) => questionObj.id == id ? questionObj.setval = data.value[index] : false)
           })
@@ -102,7 +77,7 @@ export default {
         this.client.formdata = {id: [], value: []}
       }
       this.percentage = this.calcRiskIndication()
-      return questionsByCategory
+      return questions
     },
     calcRiskIndication() {
       if (this.client.formdata){
@@ -136,7 +111,7 @@ export default {
         return
       }
       let client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
-      const response = ClientService.update(client.id, client)
+      const response = Client.update(client.id, client)
       if (response.status === 200){
         this.$router.push({path: '/clienten/' + client.id})
       } else {
