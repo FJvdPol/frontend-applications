@@ -30,6 +30,7 @@ input, select {
 }
 input[type="radio"], input[type="checkbox"] {
   cursor: pointer;
+  margin-right: 0.75rem;
   -webkit-appearance: none;
   width: 2rem;
   min-width: 2rem;
