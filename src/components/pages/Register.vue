@@ -71,8 +71,8 @@ export default {
           this.$router.push({name: 'home'})
         } else {
           this.error = {
-            status: e.status,
-            message: e.error,
+            status: response.status,
+            message: response.error,
           }
           this.error.status == 400
             ? this.error.email = true
