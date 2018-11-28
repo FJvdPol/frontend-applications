@@ -51,29 +51,28 @@ export default {
   },
   methods: {
     login() {
-      if (this.user.email && this.user.pass){
+      if (!this.user.email && this.user.pass) return
 
-        const response = Authenticator.login({
-            email: this.user.email,
-            pass: this.user.pass
-          })
+      const response = Authenticator.login({
+          email: this.user.email,
+          pass: this.user.pass
+        })
 
-        this.response = response
-        if (response.status === 200) {
-          this.$store.dispatch('setUser', response.data.user)
-          this.$router.push('/clienten')
+      this.response = response
+      if (response.status === 200) {
+        this.$store.dispatch('setUser', response.data.user)
+        this.$router.push('/clienten')
+      } else {
+        this.error = {
+          status: response.status,
+          message: response.error,
+        }
+        if (this.error.status == 404){
+          this.error.email = true
+        } else if (this.error.status == 401){
+          this.error.pass = true
         } else {
-          this.error = {
-            status: response.status,
-            message: response.error,
-          }
-          if (this.error.status == 404){
-            this.error.email = true
-          } else if (this.error.status == 401){
-            this.error.pass = true
-          } else {
-            this.error.else = true
-          }
+          this.error.else = true
         }
       }
     }

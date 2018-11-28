@@ -13,11 +13,9 @@ import store from '../store/store'
 Vue.use(Router)
 
 const checkLogin = (to, from, next) => {
-  if (!store.state.user && !sessionStorage.getItem('user')) {
-    next({name: 'login'})
-  } else {
-    next()
-  }
+  !store.state.user && !sessionStorage.getItem('user')
+    ? next({name: 'login'})
+    : next()
 }
 
 const routes = [

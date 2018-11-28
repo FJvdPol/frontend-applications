@@ -59,17 +59,15 @@ export default {
       error: {}
     }
   },
-  async mounted() {
+  mounted() {
     const response = ClientService.get(this.$route.params.id)
-    if (response.status === 200){
-      this.client = response.data.client
-    } else {
-      this.error = {
-        status: response.status,
-        message: response.error,
-      }
+    response.status === 200
+      ? this.client = response.data.client
+      : this.error = {
+          status: response.status,
+          message: response.error,
+        }
       console.log(this.error)
-    }
   },
   methods: {
     clientRiskIndication() {

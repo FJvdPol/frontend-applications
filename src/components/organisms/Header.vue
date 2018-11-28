@@ -23,13 +23,12 @@
           </li>
         </ul>
         <ul class="bottom">
-
           <li @click="logOut" v-if="$store.state.user">Ingelogd als: <span>{{$store.state.user.name}}</span></li>
-          <router-link v-else :to="{ name: 'login' }">
-            <li>log in</li>
-          </router-link>
-
-
+          <li v-else>
+            <router-link :to="{ name: 'login' }">
+              Log in
+            </router-link>
+          </li>
         </ul>
       </nav>
     </div>
@@ -48,11 +47,7 @@ export default {
   },
   methods: {
     toggleMenu(){
-      if (this.menuVisible){
-        this.menuVisible = false
-      } else {
-        this.menuVisible = true
-      }
+      this.menuVisible = !this.menuVisible
     },
     logOut() {
       sessionStorage.removeItem('user')
@@ -251,6 +246,7 @@ export default {
           &:last-of-type {
             line-height: 2;
             span {
+              text-transform: capitalize;
               color: white;
               font-weight: 500;
               cursor: pointer;

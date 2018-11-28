@@ -53,32 +53,30 @@ export default {
     }
   },
   methods: {
-    async registerUser() {
+    registerUser() {
       if (!this.user.name || !this.user.email || !this.user.pass){
         !this.user.name ? this.error.name = true : this.error.name = false
         !this.user.email ? this.error.email = true : this.error.email = false
         !this.user.pass ? this.error.pass = true : this.error.pass = false
       }
       else {
-        try {
-          const response = await Authenticator.register({
-            name: this.user.name,
-            email: this.user.email,
-            pass: this.user.pass
-          })
+        const response = Authenticator.register({
+          name: this.user.name,
+          email: this.user.email,
+          pass: this.user.pass
+        })
+        if (response.status === 200) {
           this.response = response
           this.$store.dispatch('setUser', response.data.user)
           this.$router.push({name: 'home'})
-        } catch (e) {
+        } else {
           this.error = {
             status: e.status,
             message: e.error,
           }
-          if (this.error.status == 400){
-            this.error.email = true
-          } else {
-            this.error.else = true
-          }
+          this.error.status == 400
+            ? this.error.email = true
+            : this.error.else = true
         }
       }
     }

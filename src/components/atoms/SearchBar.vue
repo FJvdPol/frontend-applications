@@ -19,22 +19,21 @@ export default {
   },
   methods: {
     toggleNav() {
-      if (this.value) {
-        return
-      }
-      if (this.open) {
-        document.querySelector('#search-input').blur()
-      } else {
-        document.querySelector('#search-input').focus()
-      }
+      if (this.value) return
+      this.open
+        ? document.querySelector('#search-input').blur()
+        : document.querySelector('#search-input').focus()
+
       this.open = !this.open
-      this.action ? this.action() : false
+      if (this.action) this.action()
     }
   },
   watch: {
     value(value) {
-      this.open ? this.$emit('valueChange', value) : false
-      this.value ? document.querySelector('#search-button').classList.add('has-value') : document.querySelector('#search-button').classList.remove('has-value')
+      if(this.open) this.$emit('valueChange', value)
+      this.value
+        ? document.querySelector('#search-button').classList.add('has-value')
+        : document.querySelector('#search-button').classList.remove('has-value')
     }
   }
 }

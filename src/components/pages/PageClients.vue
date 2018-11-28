@@ -33,9 +33,7 @@ export default {
   async mounted() {
     setTimeout(() => {
       const response = ClientService.getAll()
-      if (response.status === 200) {
-        return this.clients = response.data.clients
-      }
+      if (response.status === 200) return this.clients = response.data.clients
       const fakeClients = [
         {
           name: 'johan',
@@ -56,7 +54,7 @@ export default {
       ]
       fakeClients.forEach(client => ClientService.create(client))
       this.clients = ClientService.getAll().data.clients
-    }, 3000)
+    }, 1500)
 
   },
   components: {
@@ -77,7 +75,9 @@ export default {
     flex-wrap: wrap;
     padding-top: 1rem;
     .client {
-      margin-right: 1rem;
+      @media screen and (min-width: 42rem) {
+        margin-right: 1rem;
+      }
     }
   }
 </style>

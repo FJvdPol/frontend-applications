@@ -22,12 +22,10 @@ export default {
 
   getAll() {
     const encClients = JSON.parse(sessionStorage.getItem('clients'))
-    if (!encClients) {
-      return {
+    if (!encClients) return {
         status: 404,
         error: 'No clients found'
       }
-    }
     const clients = encClients.map(client => ({...client, lastname: crypt.decode(client.lastname)}))
     return {
       status: 200,
@@ -39,12 +37,10 @@ export default {
 
   get(id) {
     const clients = JSON.parse(sessionStorage.getItem('clients'))
-    if (!clients || !clients[id]) {
-      return {
+    if (!clients || !clients[id]) return {
         status: 404,
         error: 'Client was not found'
       }
-    }
     const client = {...clients[id], lastname: crypt.decode(clients[id].lastname)}
     return {
       status: 200,
@@ -56,12 +52,10 @@ export default {
 
   update(id, client) {
     const clients = JSON.parse(sessionStorage.getItem('clients'))
-    if (!clients || !clients[id]) {
-      return {
+    if (!clients || !clients[id]) return {
         status: 404,
         error: 'Client was not found'
       }
-    }
     client = {...client, lastname: crypt.encode(client.lastname)}
     clients[id] = client
     sessionStorage.setItem('clients', JSON.stringify(clients))

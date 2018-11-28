@@ -1,33 +1,34 @@
 import questionFile from '../assets/data.json'
 
 export default {
-  categories(search) {
+  key(key, search) {
     return (
       questionFile
         .filter(obj => search ? obj.question.toLowerCase().indexOf(search) > -1 : true)
-        .map(question => {
-          return question['category']
-        })
+        .map(question => question[key])
         .filter((category, firstTime, categories) => {
-          // return alleen unieke categorieën, geen dubbele
-          if (categories.indexOf(category) == firstTime) {
-            return category
-          }
+          if (categories.indexOf(category) == firstTime) return category
         })
     )
   },
-  byCategory(search) {
-    // get list of all categories
-    const categories = this.categories(search)
-    const questions = []
-    // for every category, get all the questionObjects that have it's name as value of category key
-    categories.forEach(category => {
-      questions.push(
+  byType(search){
+    const types = this.key('type', search)
+    return types
+      .map(type =>
         questionFile
-          .filter(obj => search ? obj.question.toLowerCase().indexOf(search) > -1 : true) // remove objects that don't contain searchquery in question key
-          .filter((object) => object.category === category)
+          .filter((object) => object.type === type)
       )
-    })
-    return questions
+      .map(questions =>
+        this
+          .byCategory(search, questions)
+          .filter(category => category.length > 0)
+      )
+  },
+  byCategory(search, questions = questionFile) {
+    const categories = this.key('category', search)
+    return categories.map(category =>
+      questions
+        .filter(obj => search ? obj.question.toLowerCase().indexOf(search) > -1 : true)
+        .filter(obj => obj.category === category))
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <article class="tab-page-holder">
-    <section v-if="questionsByCategory == 0" class="active-page tab-page">
+    <section v-if="questions.length == 0" class="active-page tab-page">
       <div class="container">
         <p class="center">geen vragen gevonden</p>
         <figure>
@@ -8,16 +8,20 @@
         </figure>
       </div>
     </section>
-    <section v-for="(category, index) in questionsByCategory" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
+    <section v-for="(type, index) in questions" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
       <div class="container-form container">
-        <h2>{{categories[index]}}</h2>
+        <h2>{{types[index]}}</h2>
         <form @submit.prevent>
-          <input-group @valueChange="emitChildValue" v-for="(questionObject, index) in splitQuestions(index)" :inputObject="questionObject" :key="index" />
-        </form>
-        <Button v-if="index < questionsByCategory.length - 1" @click.native="nextPage(index)" :textContent="'volgende'"/>
-        <Button :class="'secondary'" v-if="index < questionsByCategory.length - 1" @click.native="saveForm" :textContent="'wijzigingen opslaan'"/>
+          <div v-for="(category, i) in type" :key="i">
+            <h3>{{category[0].category}}</h3>
+            <input-group @valueChange="emitChildValue" v-for="(question, index) in category" :inputObject="question" :key="index" />
+          </div>
 
-        <Button v-if="index === questionsByCategory.length - 1" :textContent="'opslaan'" @click.native="saveForm"/>
+        </form>
+        <Button v-if="index < types.length - 1" :data-index="index" @click.native="nextPage" :textContent="'volgende'"/>
+        <Button :class="'secondary'" v-if="index < types.length - 1" @click.native="saveForm" :textContent="'wijzigingen opslaan'"/>
+
+        <Button v-if="index === types.length - 1" :textContent="'opslaan'" @click.native="saveForm"/>
       </div>
     </section>
   </article>
@@ -35,16 +39,13 @@ export default {
       values: []
     }
   },
-  props: ['questionsByCategory', 'categories'],
+  props: ['questions', 'types'],
   methods: {
-    splitQuestions(index) {
-      return this.questionsByCategory[index]
-    },
     emitChildValue(data){
       this.$emit('valueChange', data)
     },
-    nextPage(index){
-      this.$store.dispatch('formSetIndex', index + 1)
+    nextPage(e){
+      this.$store.dispatch('formSetIndex', Number(e.target.dataset.index) + 1)
     },
     saveForm() {
       this.$emit('saveForm')
@@ -91,6 +92,13 @@ export default {
   figure {
     width: 50%;
     margin: 0 auto;
+  }
+  h3 {
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-main);
   }
 
 </style>

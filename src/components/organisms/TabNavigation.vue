@@ -1,7 +1,9 @@
 <template>
   <nav id="tab-nav">
     <ul>
-      <li v-for="(tab, index) in tabs" v-on:click="changeActiveTab(index)" :key="index" :class="index === 0 ? 'active-tab' : ''"><button>{{tab}}</button></li>
+      <li v-for="(tab, index) in tabs" @click="setIndex(index)" :key="index" :class="index === 0 ? 'active-tab' : ''">
+        <button>{{tab}}</button>
+      </li>
     </ul>
     <div v-if="tabs.length > 0" id="tab-bg"></div>
   </nav>
@@ -10,81 +12,63 @@
 
 <script>
 import { TweenLite } from 'gsap/all'
-// import store from '../../store/store.js'
 
 export default {
   name: 'AnalysisNavigation',
   props: ['tabs'],
   computed: {
     index() {
-      this.changeActiveTab(this.$store.state.formindex)
       return this.$store.state.formindex
     }
   },
-  mounted() {
-    this.changeActiveTab(0)
-  },
   watch: {
     tabs() {
-      this.changeActiveTab(0)
+      this.$store.state.formindex === 0
+        ? this.changeActiveTab(0)
+        : this.$store.dispatch('formSetIndex', 0)
     },
     index(index) {
       this.changeActiveTab(index)
     }
   },
   methods: {
+    setIndex(index) {
+      this.$store.dispatch('formSetIndex', index)
+    },
     changeActiveTab(index) {
-      let allTabs = document.querySelectorAll('#tab-nav li')
-      if (index === allTabs.length || !allTabs[index]){
-        return false
-      }
-      let activeTab = allTabs[index]
+      const allTabs = document.querySelectorAll('#tab-nav li')
+      if (index === allTabs.length || !allTabs[index]) return false
+      const activeTab = allTabs[index]
       this.animateTabNav(activeTab, allTabs, index)
     },
     animateTabNav(activeTab, allTabs, index) {
-      // start animation phase
-      // set timing for easing to scrolltop if page has been scrolled
-      let timing = window.scrollY > 0 ? 0.5 : 0
-      let allPages = document.querySelectorAll('.tab-page')
-      if (allPages.length !== allTabs.length) {
-        return false
-      }
+      const allPages = document.querySelectorAll('.tab-page')
+      if (allPages.length !== allTabs.length) return false
 
-      // scroll to top of page
-      TweenLite.to(window, timing, {scrollTo: {y:0}, autoKill:true, onComplete: () => {
-
-
-        // toggle active class
-        if (allTabs.length > 1) {
+      const timing = window.scrollY > 0
+        ? 0.5
+        : 0
+      TweenLite.to(window, timing, {scrollTo: {y:0}, autoKill:true,
+        onComplete: () => {
           allTabs.forEach((tabInstance, tabIndex) => {
             tabInstance.classList.remove('active-tab')
             allPages[tabIndex].classList.remove('active-page')
-            if (tabInstance === activeTab) {
-              allPages[tabIndex].classList.add('active-page')
-            }
+            if (tabInstance === activeTab) allPages[tabIndex].classList.add('active-page')
           })
+          activeTab.classList.add('active-tab')
+          this.changeTabBg(activeTab, allTabs, index)
+          const center = (window.innerWidth - activeTab.offsetWidth) / 2
+          const navigation = document.querySelector('#tab-nav');
+          TweenLite.to(navigation, 0.3, {scrollTo: {x:activeTab.offsetLeft, offsetX:center}})
         }
-        activeTab.classList.add('active-tab')
-        this.changeNavBg(activeTab, allTabs, index)
-
-        // scroll container to get active tab in view
-        let center = (window.innerWidth - activeTab.offsetWidth) / 2
-        let container = document.querySelector('#tab-nav');
-        TweenLite.to(container, 0.3, {scrollTo: {x:activeTab.offsetLeft, offsetX:center}})
-      }})
-
+      })
     },
-    changeNavBg(activeTab, allTabs, index) {
-
-      let bg = document.querySelector('#tab-bg')
-      let newElWidth, newElLeft
-      // get offsets for animation
-      if (index == (allTabs.length - 1)) {
-        newElWidth = activeTab.offsetWidth / 16 - 0.5 + 'rem'
-      } else {
-        newElWidth = activeTab.offsetWidth / 16 + 2 + 'rem'
-      }
-      newElLeft = activeTab.offsetLeft - 40 + 'px'
+    changeTabBg(activeTab, allTabs, index) {
+      const bg = document.querySelector('#tab-bg')
+      const newElWidth = index === (allTabs.length - 1)
+        ? activeTab.offsetWidth / 16 - 0.5 + 'rem'
+        : activeTab.offsetWidth / 16 + 2 + 'rem'
+      const newElLeft = activeTab.offsetLeft - 40 + 'px'
       TweenLite.to(bg, 0.3, {width: newElWidth, x: newElLeft})
     }
   }

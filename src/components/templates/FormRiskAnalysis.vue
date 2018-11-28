@@ -5,9 +5,9 @@
         <h2>{{client.name}} {{client.lastname}}</h2>
       </router-link>
       <search-bar :action="growNav" @valueChange="applySearchQuery"/>
-      <tab-navigation :tabs="categories"/>
+      <tab-navigation :tabs="types"/>
     </div>
-    <analysis-body @valueChange="updateSelected" @saveForm="updateClient" :questionsByCategory="questionsByCategory" :categories="categories"/>
+    <analysis-body @valueChange="updateSelected" @saveForm="updateClient" :questions="questions" :types="types"/>
     <div class="risk-indication-bar">
       <risk-indication :percentage="percentage" />
     </div>
@@ -33,8 +33,8 @@ export default {
       nextPageIndex: 0,
       openNav: false,
       searchQuery: '',
-      categories: [],
-      questionsByCategory: [],
+      types: [],
+      questions: [],
       error: {}
     }
   },
@@ -50,8 +50,8 @@ export default {
       if (typeof this.client.formdata == "string"){
         this.client.formdata = JSON.parse(this.client.formdata)
       }
-      this.questionsByCategory = this.getQuestionsByCategory()
-      this.categories = Questions.categories()
+      this.questions = this.getQuestions()
+      this.types = Questions.key('type')
     }
   },
   methods: {
@@ -59,68 +59,69 @@ export default {
       this.openNav = !this.openNav
     },
     applySearchQuery(value) {
-      this.searchQuery = value.toLowerCase()
-      this.questionsByCategory = this.getQuestionsByCategory(this.searchQuery)
-      this.categories = Questions.categories(this.searchQuery)
+      value = value.toLowerCase()
+      this.questions = this.getQuestions(value)
+      this.types = Questions.key('type', value)
     },
-    getQuestionsByCategory() {
-      const questions = Questions.byCategory(this.searchQuery)
-      if (this.client.formdata) { // if client has formdata in the database
-        this.percentage = this.client.risk
-        let data = this.client.formdata // get formdata
-        questions.forEach(category => { // send which parts of the form have already been set
-          category.forEach(questionObj => {
-            data.id.forEach((id, index) => questionObj.id == id ? questionObj.setval = data.value[index] : false)
-          })
-        })
-      } else {
-        this.client.formdata = {id: [], value: []}
+    getQuestions(search = '') {
+      const questions = Questions.byType(search)
+      if (!this.client.formdata) {
+        this.client.formdata = []
+        this.percentage = this.calcRiskIndication()
+        return questions
       }
-      this.percentage = this.calcRiskIndication()
-      return questions
+      this.percentage = this.client.risk
+      const data = this.client.formdata // get formdata
+      // check which questions have already been filled in before
+      // if so, set their initial value to the previously set value
+      const savedQuestions = questions.map(type =>
+        type.map(category =>
+          category.map(question => {
+            const existing = data.find(obj => obj.id === question.id)
+            return !existing
+              ? question
+              : {
+                  ...question,
+                  setval: existing.value
+                }
+          })
+        )
+      )
+      return savedQuestions
     },
     calcRiskIndication() {
       if (this.client.formdata){
-        if (this.client.formdata.value.length == 0) {
+        if (this.client.formdata.length == 0) {
           return 0
         }
-        let sum = this.client.formdata.value.reduce((acc, cur) => acc + cur)
+        const sum = this.client.formdata
+          .map(obj => obj.value)
+          .reduce((acc, cur) => acc + cur)
         return ( 1 / ( 1 + Math.exp( -1 * ( -8.57219 + sum ) ) ) * 100 ).toFixed( 2 )
       }
     },
     updateSelected(selected) {
-      let alreadyIn = false
-      let saved = this.client.formdata
-      saved.id.forEach((id, index) => {
-        if (selected.id == id) {
-          saved.value[index] = selected.value
-          alreadyIn = true
-        }
-      })
-      if (!alreadyIn) {
-        saved.id.push(selected.id)
-        saved.value.push(selected.value)
-      }
+      const saved = this.client.formdata
+      const index = saved.findIndex(obj => selected.id === obj.id)
+      index > -1
+        ? saved[index].value = selected.value
+        : saved.push(selected)
       this.client.formdata = saved
       this.percentage = this.calcRiskIndication()
-      let client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
+      const client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
       sessionStorage.setItem('client', JSON.stringify(client))
     },
     updateClient(){
-      if (!this.client) {
-        return
-      }
-      let client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
+      if (!this.client) return
+      const client = {...this.client, risk: this.percentage, formdata: JSON.stringify(this.client.formdata)}
       const response = Client.update(client.id, client)
-      if (response.status === 200){
-        this.$router.push({path: '/clienten/' + client.id})
-      } else {
-        this.error = {
-          status: response.status,
-          message: response.error,
-        }
-        console.log(this.error)
-      }
+      response.status === 200
+        ? this.$router.push({path: '/clienten/' + client.id})
+        : this.error = {
+            status: response.status,
+            message: response.error
+          }
+      console.log(this.error)
     }
   }
 }
@@ -139,6 +140,11 @@ export default {
       font-size: 1rem;
       transition: all 0.3s;
       text-transform: capitalize;
+    }
+    #tab-nav {
+      #tab-bg {
+        width: 3.75rem;
+      }
     }
     @media(min-width: 60rem){
       form {
