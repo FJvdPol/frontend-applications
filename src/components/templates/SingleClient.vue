@@ -67,7 +67,6 @@ export default {
           status: response.status,
           message: response.error,
         }
-      console.log(this.error)
   },
   methods: {
     clientRiskIndication() {
