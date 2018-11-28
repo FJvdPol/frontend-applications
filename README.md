@@ -1,22 +1,19 @@
 # frontend-applications
+## Summary
+Prototype of a vue webapp which helps youth workers to quickly estimate the risk of their clients ending up in an intense help programme.
+![Overview](docs/screenshot_1.png)
 
-## Project setup
-```
+## Table of Contents
+
+## Install
+```bash
+# Install necessary packages
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+# Compiles and hot-reloads for development
 npm run serve
-```
 
-### Start server and database
-```
-nodemon server
-```
-
-### Compiles and minifies for production
-```
+# Compiles and minifies for production
 npm run build
 ```
 
