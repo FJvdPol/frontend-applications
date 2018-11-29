@@ -39,7 +39,7 @@
     "id": 2,
     "question": "Type huishouden: ",
     "category": "Huisvesting",
-    "type": "Huisvesting",
+    "type": "Huis",
     "choices": [
         {
           "choice": "Eenouderhuishouden",
@@ -83,7 +83,7 @@
     "id": 3,
     "question": "Scheiding: ",
     "category": "Huiselijke relaties",
-    "type": "Huisvesting",
+    "type": "Huis",
     "choices": [
       {
         "choice": "Ja",
@@ -143,6 +143,7 @@
     "id": 6,
     "question": "Soort woning: ",
     "category": "Huisvesting",
+    "type": "Huis",
     "choices": [
       {
         "choice": "Eigen woning",
@@ -222,6 +223,7 @@
     "id": 10,
     "question": "Hulptraject: ",
     "category": "Algemeen",
+    "type": "Kind",
     "choices": [
       {
         "choice": "Jeugdhulp zonder verblijf gehad",
