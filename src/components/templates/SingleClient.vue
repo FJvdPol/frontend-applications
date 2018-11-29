@@ -7,9 +7,11 @@
     <article class="tab-page-holder">
       <section v-for="(category, index) in categories" :key="index" :class="index === 0 ? 'active-page tab-page' : 'tab-page'">
         <div class="container">
-          <div class="risicoindicatie" v-if="index == 0">
+          <div class="risk-indication" v-if="index == 0">
             <div class="list" v-if="!isNaN(client.risk)" >
-              <risk-indication :percentage="client.risk"/>
+              <risk-indication :percentage="client.risk" v-if="client.risk !== 0"/>
+              <h3 v-if="client.risk === 0">Er is nog geen risicopercentage berekend voor deze client.</h3>
+              <h3 v-if="client.risk !== 0 && JSON.parse(client.formdata).length < 20">Nog niet alle velden zijn ingevuld ({{JSON.parse(client.formdata).length}}/20)</h3>
               <Button class="center" :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
             </div>
 
@@ -55,6 +57,7 @@ export default {
   data(){
     return {
       client: {},
+      progress: 0,
       categories: ['Risico Indicatie', 'Algemeen'],
       error: {}
     }
@@ -178,6 +181,16 @@ export default {
       li {
         margin: 1rem 0;
         width: 100%;
+      }
+    }
+    .risk-indication {
+      h3 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        @media(min-width: 40rem){
+          text-align: left;
+        }
       }
     }
     .normal-content {
