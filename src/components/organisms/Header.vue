@@ -18,7 +18,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'info' }">
-              About
+              Info
             </router-link>
           </li>
         </ul>
