@@ -1,0 +1,8 @@
+{
+  "short_name": "KVT",
+  "name": "Kind Veilig Thuis",
+  "start_url": "/",
+  "background_color": "#463AFF",
+  "display": "fullscreen",
+  "theme_color": "#463AFF"
+}
