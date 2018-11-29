@@ -64,6 +64,9 @@ export default {
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
   }
+  h3 {
+    text-transform: capitalize;
+  }
   .tab-page-holder {
     min-height: 50vh;
     .tab-page {
@@ -92,13 +95,6 @@ export default {
   figure {
     width: 50%;
     margin: 0 auto;
-  }
-  h3 {
-    text-transform: capitalize;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-main);
   }
 
 </style>

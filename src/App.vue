@@ -64,6 +64,9 @@ export default {
   }
   h3 {
     font-weight: 500;
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-main);
   }
   a {
     text-decoration: none;

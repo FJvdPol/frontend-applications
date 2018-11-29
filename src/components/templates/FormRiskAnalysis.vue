@@ -71,7 +71,7 @@ export default {
         return questions
       }
       this.percentage = this.client.risk
-      const data = this.client.formdata // get formdata
+      const data = this.client.formdata
       // check which questions have already been filled in before
       // if so, set their initial value to the previously set value
       const savedQuestions = questions.map(type =>
@@ -102,6 +102,7 @@ export default {
     },
     updateSelected(selected) {
       const saved = this.client.formdata
+      // check if question has been anwsered before. If so, change it's saved value, otherwise, save the question and current value.
       const index = saved.findIndex(obj => selected.id === obj.id)
       index > -1
         ? saved[index].value = selected.value
