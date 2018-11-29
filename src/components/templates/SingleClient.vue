@@ -11,7 +11,7 @@
             <div class="list" v-if="!isNaN(client.risk)" >
               <risk-indication :percentage="client.risk" v-if="client.risk !== 0"/>
               <h3 v-if="client.risk === 0">Er is nog geen risicopercentage berekend voor deze client.</h3>
-              <h3 v-if="client.risk !== 0 && JSON.parse(client.formdata).length < 20">Nog niet alle velden zijn ingevuld ({{JSON.parse(client.formdata).length}}/20)</h3>
+              <h3 v-if="client.risk !== 0 && JSON.parse(client.formdata).length < 21">Nog niet alle velden zijn ingevuld ({{JSON.parse(client.formdata).length}}/21)</h3>
               <Button class="center" :textContent="'indicatie bijstellen'" @click.native="clientRiskIndication"/>
             </div>
 
